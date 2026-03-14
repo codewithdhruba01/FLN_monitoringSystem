@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Cluster - FLN Daily Monitoring System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="cluster">
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <div class="logo-section">
+          <div class="logo">
+            <img src="logo.svg" alt="Space ECE India Foundation Logo" />
+          </div>
+          <div class="header-text">
+            <h1>FLN Daily Monitoring System</h1>
+            <p>Space ECE India Foundation</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="breadcrumb">
+          <div class="breadcrumb-item active">Cluster</div>
+          <div class="breadcrumb-separator">></div>
+          <div class="breadcrumb-item">School</div>
+          <div class="breadcrumb-separator">></div>
+          <div class="breadcrumb-item">Class Progress</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <div class="page-heading">
+        <h2>Select Cluster</h2>
+        <p>Choose the cluster you want to monitor today</p>
+      </div>
+
+      <div class="card">
+        <form id="clusterForm">
+          <div class="form-group">
+            <label for="clusterSelect">
+              Select Cluster
+              <span class="required">*</span>
+            </label>
+            <select id="clusterSelect" name="cluster" required>
+              <option value="">-- Please Select a Cluster --</option>
+              <option value="Halol">Halol</option>
+              <option value="Maval">Maval</option>
+            </select>
+            <div class="error-message">Please select a cluster to continue</div>
+          </div>
+
+          <button type="button" id="continueBtn" class="btn btn-primary btn-full">Continue to Schools</button>
+        </form>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>© 2026 Space ECE India Foundation | FLN Monitoring System</footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
