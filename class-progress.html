@@ -101,6 +101,18 @@
             <input type="number" id="studentsPresent" name="studentsPresent" min="0" max="40" required />
             <div class="error-message">Please enter the number of students present</div>
           </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="totalGirls">Total Girls</label>
+              <input type="number" id="totalGirls" name="totalGirls" min="0" max="40" />
+            </div>
+
+            <div class="form-group">
+              <label for="totalBoys">Total Boys</label>
+              <input type="number" id="totalBoys" name="totalBoys" min="0" max="40" />
+            </div>
+          </div>
         </div>
 
         <!-- ================================================
@@ -283,7 +295,33 @@
         </div>
 
         <!-- ================================================
-             SECTION E: GENERAL OBSERVATION
+             SECTION E: FULL CLASS ATTENDANCE SHEET
+             ================================================ -->
+        <div class="card form-section">
+          <h3 class="section-title">Full Class Attendance Sheet</h3>
+
+          <p style="margin-bottom: 20px; font-size: 14px; color: #666666;">
+            Mark attendance for all students (Present / Absent).
+          </p>
+
+          <div class="table-container">
+            <table id="attendanceTable">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Student ID</th>
+                  <th>Attendance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ================================================
+             SECTION F: GENERAL OBSERVATION
              ================================================ -->
         <div class="card form-section">
           <h3 class="section-title">General Observation</h3>

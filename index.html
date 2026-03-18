@@ -1,910 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tracker - Team Management</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#030b23;
-color:white;
-line-height:1.6;
-}
-
-.container{
-width:90%;
-max-width:1200px;
-margin:auto;
-}
-
-/* NAVBAR */
-
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-}
-
-/* logo */
-
-.logo{
-font-size:28px;
-font-weight:700;
-line-height:1.1;
-}
-
-.logo span{
-font-weight:600;
-}
-
-/* menu */
-
-.nav-links{
-display:flex;
-list-style:none;
-gap:35px;
-}
-
-.nav-links li a{
-text-decoration:none;
-color:#cfd4ff;
-font-size:16px;
-}
-
-.nav-links li a:hover{
-color:white;
-}
-
-
-/* buttons */
-
-.auth-btn{
-display:flex;
-gap:12px;
-}
-
-.btn{
-padding:8px 18px;
-border-radius:20px;
-border:1px solid #4b5cff;
-background:transparent;
-color:white;
-cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#4b5cff;
-}
-
-@media (max-width:768px){
-
-.navbar{
-flex-direction:column;
-gap:15px;
-}
-
-.nav-links{
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-}
-
-.auth-btn{
-justify-content:center;
-}
-
-}
-
-/* HERO */
-
-.hero{
-position:relative;
-overflow:hidden;
-}
-
-/* container */
-
-.floating-shapes{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-}
-
-/* glowing ring */
-
-.ring{
-position:absolute;
-width:80px;
-height:80px;
-border-radius:50%;
-border:10px solid transparent;
-background:linear-gradient(#7a5cff,#b48cff) border-box;
--webkit-mask:
-linear-gradient(#000000 0 0) padding-box,
-linear-gradient(#000 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-left:10%;
-top:170px;
-animation:float 6s ease-in-out infinite;
-filter:blur(1px);
-}
-
-/* triangle */
-
-.triangle{
-position:absolute;
-width:0;
-height:0;
-border-left:40px solid transparent;
-border-right:40px solid transparent;
-border-bottom:70px solid #897cff62;
-right:12%;
-top:180px;
-filter:drop-shadow(0 0 20px #8a7cff);
-animation:float 7s ease-in-out infinite;
-}
-
-/* cube style shape */
-
-.cube{
-position:absolute;
-width:160px;
-height:160px;
-background:linear-gradient(135deg,#7a5cffa7,#a48bffae);
-filter:drop-shadow(0 0 10px #8a7cff);
-left:-60px;
-top:600px;
-transform:rotate(45deg);
-border-radius:20px;
-opacity:0.8;
-animation:float 8s ease-in-out infinite;
-}
-
-/* floating animation */
-
-@keyframes float{
-
-0%{
-transform:translateY(0px) rotate(45deg);
-}
-
-50%{
-transform:translateY(-25px) rotate(45deg);
-}
-
-100%{
-transform:translateY(0px) rotate(45deg);
-}
-
-}
-
-.hero{
-text-align:center;
-padding:80px 0;
-background: radial-gradient(circle at top,#16245c,#030b23);
-position:relative;
-overflow:hidden;
-}
-
-.hero h1{
-font-size:48px;
-font-weight:700;
-margin-bottom:20px;
-}
-
-.hero p{
-color:#cfd4ff;
-max-width:600px;
-margin:auto;
-margin-bottom:30px;
-}
-
-.hero-buttons{
-margin-top:20px;
-display:flex;
-gap:15px;
-justify-content:center;
-}
-
-.btn-primary{
-background:#4b5cff;
-border:none;
-padding:14px 30px;
-border-radius:30px;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-.btn-primary:hover{
-background:#3948d174;
-border:2px solid #4b5cff;
-
-}
-
-.btn-secondary{
-background:transparent;
-border:2px solid #4b5cff;
-padding:14px 30px;
-border-radius:30px;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-.btn-secondary:hover{
-background:#4b5cff;
-}
-
-/* DASHBOARD IMAGE */
-
-.dashboard{
-margin-top:50px;
-text-align:center;
-}
-
-.dashboard img{
-width:90%;
-border-radius:15px;
-box-shadow:0 20px 60px rgba(0,0,0,0.6);
-}
-
-/* FEATURES */
-
-.features{
-padding:80px 0;
-text-align:center;
-}
-
-.features h2{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.features p{
-color:#aab0ff;
-margin-bottom:50px;
-}
-
-/* grid */
-
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-/* cards */
-
-.feature-card{
-background:#0b1436;
-padding:35px 25px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,0.05);
-transition:all 0.3s ease;
-}
-
-/* icon */
-
-.feature-icon{
-font-size:30px;
-color:#4b5cff;
-margin-bottom:15px;
-}
-
-/* hover */
-
-.feature-card:hover{
-transform:translateY(-8px) scale(1.02);
-border-color:#4b5cff;
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
-}
-
-/* mobile */
-
-@media (max-width:768px){
-
-.features h2{
-font-size:26px;
-}
-
-.feature-card{
-padding:25px;
-}
-
-}
-
-/* PRODUCTIVITY */
-
-.productivity{
-padding:100px 0;
-text-align:center;
-}
-
-.productivity h2{
-font-size:36px;
-margin-bottom:10px;
-}
-
-.cards{
-display:flex;
-gap:30px;
-flex-wrap:wrap;
-justify-content:center;
-margin-top:50px;
-}
-
-.card{
-background:#0b1436;
-padding:20px;
-width:300px;
-border-radius:12px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card img{
-width:100%;
-border-radius:10px;
-}
-
-.card h4{
-margin-top:15px;
-}
-
-.card p{
-font-size:14px;
-color:#aab0ff;
-}
-
-/* CTA */
-
-.cta{
-margin:80px auto;
-background:linear-gradient(90deg,#283593,#1a237e);
-padding:60px;
-border-radius:20px;
-text-align:center;
-width:90%;
-max-width:1000px;
-}
-
-.cta h2{
-font-size:32px;
-margin-bottom:10px;
-}
-
-.cta p{
-color:#d1d6ff;
-margin-bottom:25px;
-}
-
-.cta-buttons{
-margin-top:20px;
-display:flex;
-gap:15px;
-justify-content:center;
-flex-wrap:wrap;
-}
-
-.cta-primary{
-padding:12px 28px;
-border:none;
-background:white;
-color:#1a237e;
-border-radius:30px;
-font-weight:600;
-cursor:pointer;
-}
-
-.cta-primary:hover{
-opacity:0.5;
-z-index:1;
-}
-
-.cta-secondary{
-padding:12px 28px;
-border:2px solid white;
-background:transparent;
-color:white;
-border-radius:30px;
-font-weight:600;
-cursor:pointer;
-}
-
-.cta-secondary:hover{
-background:white;
-color:#1a237e;
-}
-/* FOOTER */
-
-.footer{
-background:#020a22;
-color:white;
-padding:60px 0 20px;
-border-top: 2px solid rgba(255, 255, 255, 0.412);
-}
-
-.footer-container{
-width:90%;
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:40px;
-}
-
-.footer-logo{
-font-size:22px;
-margin-bottom:10px;
-}
-
-.footer-links ul{
-list-style:none;
-padding:0;
-}
-
-.footer-links ul li{
-margin:8px 0;
-}
-
-.footer-links ul li a{
-text-decoration:none;
-color:#aab0ff;
-}
-
-.footer-links ul li a:hover{
-color:white;
-}
-
-.footer-contact p{
-margin:6px 0;
-color:#aab0ff;
-}
-
-.social-icons a{
-margin-right:12px;
-font-size:18px;
-color:#aab0ff;
-}
-
-.social-icons a:hover{
-color:white;
-}
-
-.footer-bottom{
-text-align:center;
-margin-top:40px;
-padding-top:20px;
-border-top:1px solid rgba(255,255,255,0.1);
-color:#aab0ff;
-}
-
-/* =========================
-TABLET
-========================= */
-
-@media (max-width:992px){
-
-.hero h1{
-font-size:38px;
-}
-
-nav ul{
-gap:20px;
-}
-
-.cards{
-gap:20px;
-}
-
-.card{
-width:260px;
-}
-
-.dashboard img{
-width:100%;
-}
-
-}
-
-/* =========================
-MOBILE
-========================= */
-
-@media (max-width:768px){
-
-.container{
-width:92%;
-}
-
-/* navbar */
-
-nav{
-flex-direction:column;
-gap:15px;
-}
-
-nav ul{
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-}
-
-.auth-btn{
-justify-content:center;
-}
-
-/* hero */
-
-.hero{
-padding:60px 0;
-}
-
-.hero h1{
-font-size:30px;
-line-height:1.3;
-}
-
-.hero p{
-font-size:14px;
-padding:0 10px;
-}
-
-.hero-buttons{
-flex-direction:column;
-align-items:center;
-}
-
-.btn-primary,
-.btn-secondary{
-width:200px;
-}
-
-/* cards */
-
-.cards{
-flex-direction:column;
-align-items:center;
-}
-
-.card{
-width:100%;
-max-width:320px;
-}
-
-/* feature grid */
-
-.feature-grid{
-grid-template-columns:1fr;
-}
-
-/* productivity */
-
-.productivity{
-padding:70px 0;
-}
-
-/* CTA */
-
-.cta{
-padding:40px 25px;
-}
-
-.cta h2{
-font-size:24px;
-}
-
-/* footer */
-
-.footer-container{
-grid-template-columns:1fr;
-text-align:center;
-}
-
-.social-icons{
-justify-content:center;
-}
-
-}
-
-/* =========================
-SMALL MOBILE
-========================= */
-
-@media (max-width:480px){
-
-.hero h1{
-font-size:26px;
-}
-
-.hero p{
-font-size:13px;
-}
-
-.btn-primary,
-.btn-secondary{
-width:180px;
-padding:12px 20px;
-}
-
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<!-- NAVBAR -->
-
-<nav>
-
-<nav class="navbar">
-
-<div class="logo">
-FLN <br> <span>Attendance</span>
-</div>
-
-<ul class="nav-links">
-<li><a href="#home">Home</a></li>
-<li><a href="#schools">Schools</a></li>
-<li><a href="#students">Students</a></li>
-<li><a href="#reports">Reports</a></li>
-</ul>         
-
-<div class="auth-btn">
-<button class="btn">Teacher Login</button>
-<button class="btn">Admin Login</button>
-</div>
-
-</nav>
-
-</div>
-
-<!-- HERO -->
-
-<section class="hero" id="home">
-<div class="floating-shapes">
-
-<div class="ring"></div>
-
-<div class="triangle"></div>
-
-<div class="cube"></div>
-
-</div>
-
-<div class="container">
-
-<h1>Smart Kids Attendance<br>Monitoring System</h1>
-
-<p>
-Track daily attendance of students easily. 
-Monitor classroom participation, student presence, and generate reports 
-for better learning management.
-</p>
-
-<div class="hero-buttons">
-    <a href="attendeshit.html">
-<button class="btn-primary">Mark Attendance</button></a>
-<button class="btn-secondary">View Reports</button>
-</div>
-
-<div class="dashboard">
-<img src="https://images.unsplash.com/photo-1588072432836-e10032774350" alt="Kids Classroom">
-</div>
-
-</section>
-
-<!-- FEATURES -->
-
-<section class="features" id="features">
-
-<div class="container">
-
-<h2>FLN Monitoring & Attendance System</h2>
-<p>
-Monitor daily classroom activities, track student attendance, and analyze learning progress easily.
-</p>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-<i class="fa-solid fa-user-check feature-icon"></i>
-<h4>Daily Attendance</h4>
-<p>Record student attendance quickly and accurately every day.</p>
-</div>
-
-<div class="feature-card">
-<i class="fa-solid fa-book-open feature-icon"></i>
-<h4>FLN Activities</h4>
-<p>Track foundational literacy and numeracy activities conducted in classrooms.</p>
-</div>
-
-<div class="feature-card">
-<i class="fa-solid fa-school feature-icon"></i>
-<h4>School Management</h4>
-<p>Manage schools, clusters, and classes in one centralized system.</p>
-</div>
-
-<div class="feature-card">
-<i class="fa-solid fa-chart-line feature-icon"></i>
-<h4>Student Progress</h4>
-<p>Analyze learning progress and identify students needing support.</p>
-</div>
-
-<div class="feature-card">
-<i class="fa-solid fa-file-lines feature-icon"></i>
-<h4>Daily Reports</h4>
-<p>Generate daily activity reports for facilitators and teachers.</p>
-</div>
-
-<div class="feature-card">
-<i class="fa-solid fa-chart-pie feature-icon"></i>
-<h4>Analytics Dashboard</h4>
-<p>Visualize attendance data and classroom performance with charts.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- PRODUCTIVITY -->
-
-<section class="productivity"   id="productivity">
-
-<div class="container">
-
-<h2>Improve Student Learning & Classroom Monitoring</h2>
-<p style="color:#aab0ff; margin-bottom:40px;">
-Track daily classroom activities, monitor attendance, and understand student learning progress easily.
-</p>
-
-<div class="cards">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
-<h4>Student Attendance</h4>
-<p>Record daily attendance of students and monitor participation in classroom activities.</p>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1509062522246-3755977927d7">
-<h4>Classroom Activities</h4>
-<p>Track FLN activities conducted by teachers including reading, writing, and numeracy sessions.</p>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
-<h4>Learning Progress</h4>
-<p>Analyze student learning progress and identify areas where additional support is needed.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CTA -->
-
-<section class="cta"    id="cta">
-
-<h2>Start Tracking Student Attendance Today</h2>
-
-<p>
-Monitor daily classroom activities, record student attendance, and improve learning outcomes with the Saksham Daily Activity Tracker.
-</p>
-
-<div class="cta-buttons">
-<button class="cta-primary">Mark Attendance</button>
-<button class="cta-secondary">View Dashboard</button>
-</div>
-
-</section>
-
-
-
-<!-- footer  -->
-<footer class="footer">
-
-<div class="footer-container">
-
-<!-- Logo & About -->
-
-<div class="footer-about">
-
-<h3 class="footer-logo">Saksham Tracker</h3>
-
-<p>
-A digital system for tracking daily classroom activities, student attendance, 
-and FLN learning progress across schools.
-</p>
-
-</div>
-
-
-<!-- Quick Links -->
-
-<div class="footer-links">
-
-<h4>Quick Links</h4>
-
-<ul>
-<li><a href="#home">Home</a></li>
-<li><a href="#schools">Schools</a></li>
-<li><a href="#attendance">Attendance</a></li>
-<li><a href="#reports">Reports</a></li>
-</ul>
-
-</div>
-
-
-<!-- Contact Details -->
-
-<div class="footer-contact">
-
-<h4>Contact Us</h4>
-
-<p>Email: support@sakshamtracker.com</p>
-<p>Phone: +91 98765 43210</p>
-<p>Location: Gujarat, India</p>
-
-</div>
-
-
-<!-- Social Media -->
-
-<div class="footer-social">
-
-<h4>Follow Us</h4>
-
-<div class="social-icons">
-
-<a href="#"><i class="fa-brands fa-facebook"></i></a>
-<a href="#"><i class="fa-brands fa-instagram"></i></a>
-<a href="#"><i class="fa-brands fa-twitter"></i></a>
-<a href="#"><i class="fa-brands fa-linkedin"></i></a>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Bottom Bar -->
-
-<div class="footer-bottom">
-
-<p>© 2026 Saksham Daily Activity Tracker. All rights reserved.</p>
-
-</div>
-
-</footer>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FLN Daily Monitoring System - Space ECE India Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #1E88E5;
+        --primary-light: #E3F2FD;
+        --text-primary: #212121;
+        --text-secondary: #666666;
+        --white: #ffffff;
+        --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .card {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: var(--shadow-lg);
+        text-align: center;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 30px;
+        background: linear-gradient(135deg, var(--primary-color), #0D47A1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        color: var(--white);
+      }
+
+      h1 {
+        font-size: 32px;
+        color: var(--text-primary);
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .features {
+        text-align: left;
+        background: var(--primary-light);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+
+      .features h3 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 12px;
+      }
+
+      .features ul {
+        list-style: none;
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+
+      .features li {
+        padding: 6px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .features li:before {
+        content: '✓';
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+      }
+
+      .btn {
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', 'Inter', sans-serif;
+      }
+
+      .btn-primary {
+        background: var(--primary-color);
+        color: var(--white);
+      }
+
+      .btn-primary:hover {
+        background: #1565c0;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(30, 136, 229, 0.3);
+      }
+
+      .btn-secondary {
+        background: var(--white);
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary-light);
+      }
+
+      .footer-text {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .footer-text a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .footer-text a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 25px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .logo {
+          width: 60px;
+          height: 60px;
+          font-size: 30px;
+        }
+
+        .buttons {
+          flex-direction: column;
+        }
+
+        .btn {
+          padding: 12px 20px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="logo">🏫</div>
+
+        <h1>FLN Daily Monitoring System</h1>
+        <p class="subtitle">Space ECE India Foundation</p>
+
+        <p class="description">
+          A comprehensive, mobile-friendly platform for recording and monitoring foundational literacy and numeracy
+          (FLN) progress across multiple schools and clusters.
+        </p>
+
+        <div class="features">
+          <h3>Key Features</h3>
+          <ul>
+            <li>Multi-page cluster & school selection</li>
+            <li>Comprehensive daily monitoring forms</li>
+            <li>Student performance tracking (30+ students)</li>
+            <li>Responsive design for all devices</li>
+            <li>Professional data recording</li>
+          </ul>
+        </div>
+
+        <div class="buttons">
+          <a href="cluster.html" class="btn btn-primary">Start Monitoring →</a>
+          <a href="README.md" class="btn btn-secondary">View Documentation</a>
+        </div>
+
+        <div class="footer-text">
+          <p>
+            © 2026 Space ECE India Foundation | <a href="QUICK_START.md">Quick Start Guide</a> |
+            <a href="TECHNICAL_SPECS.md">Technical Docs</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

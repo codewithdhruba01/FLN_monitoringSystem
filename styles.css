@@ -515,6 +515,50 @@ table tbody tr:last-child td {
   border-color: var(--success-color);
 }
 
+/* Attendance Buttons */
+.attendance-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.attendance-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--white);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-align: center;
+  user-select: none;
+}
+
+.attendance-btn:hover {
+  border-color: var(--primary-color);
+}
+
+.attendance-btn.present {
+  color: var(--success-color);
+}
+
+.attendance-btn.present.selected {
+  background-color: var(--success-color);
+  color: var(--white);
+  border-color: var(--success-color);
+}
+
+.attendance-btn.absent {
+  color: var(--danger-color);
+}
+
+.attendance-btn.absent.selected {
+  background-color: var(--danger-color);
+  color: var(--white);
+  border-color: var(--danger-color);
+}
+
 /* Color Legend */
 .color-legend {
   display: flex;
