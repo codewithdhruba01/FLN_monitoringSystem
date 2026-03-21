@@ -34,7 +34,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 40px;
+      padding: 0 160px;
       height: 70px;
       border-bottom: 2px solid var(--border-color);
       background: #fff;
@@ -782,87 +782,159 @@
     <section class="courses-section">
       <div class="courses-container">
         <div class="courses-header">
-          <h2>Courses list</h2>
+          <h2>Schools list</h2>
         </div>
 
         <div class="categories">
-          <button class="cat-btn active">Все курсы</button>
-          <button class="cat-btn">Всем врачам</button>
-          <button class="cat-btn">Хирургия</button>
-          <button class="cat-btn">Терапия</button>
-          <button class="cat-btn">Травматология</button>
+          <button class="cat-btn active" id="btn-halol">Halol Cluster</button>
+          <button class="cat-btn" id="btn-maval">Maval Cluster</button>
         </div>
 
-        <div class="fade-out-container">
-          <div class="courses-grid">
-            <!-- Card 1 -->
-            <div class="course-card card-yellow">
-              <span class="badge">Баллы НМО</span>
-              <div class="card-image">
-                <img src="assets/course1.png" alt="Evaluating patient">
+        <div id="halol-cluster">
+          <div class="fade-out-container">
+            <div class="courses-grid">
+              <div class="course-card card-yellow">
+                <span class="badge">Halol</span>
+                <div class="card-image">
+                  <img src="assets/course1.png" alt="Halol Primary School">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Abhetlav Primary School</div>
+                  <div class="card-subtitle">Halol Cluster</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Updated: 25 March</div>
+                </div>
               </div>
-              <div class="card-content">
-                <div class="card-title">Evaluating the patient before an operation</div>
-                <div class="card-subtitle">Травматологи • Хирурги • Анестезиологи</div>
-                <div class="card-divider"></div>
-                <div class="card-date">Start 25 march at 21:00</div>
-                <div class="card-price">
-                  <span class="price-highlight">from $300</span>
-                  <span class="price-old">from $380</span>
+              <div class="course-card card-dark">
+                <span class="badge">Halol</span>
+                <div class="card-image">
+                  <img src="assets/course2.png" alt="Halol Secondary School">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Academy Centre - Masvad</div>
+                  <div class="card-subtitle">Halol Cluster</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Updated: 26 March</div>
+                </div>
+              </div>
+              <div class="course-card card-black">
+                <span class="badge">Halol</span>
+                <div class="card-image">
+                  <img src="assets/course3.png" alt="Halol High School">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Academy Centre - Arad</div>
+                  <div class="card-subtitle">Halol Cluster</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Updated: 27 March</div>
                 </div>
               </div>
             </div>
-
-            <!-- Card 2 -->
-            <div class="course-card card-dark">
-              <div class="card-image">
-                <img src="assets/course2.png" alt="Medical statistics">
+            <div class="courses-grid hidden-row">
+              <div class="course-card card-dark">
+                <span class="badge">Halol</span>
+                <div class="card-image">
+                  <img src="assets/course2.png" alt="Aedalpura Primary School">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Aedalpura Primary School</div>
+                  <div class="card-subtitle">Halol Cluster</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Updated: 29 March</div>
+                </div>
               </div>
-              <div class="card-content">
-                <div class="card-title">Scool of medical statistics</div>
-                <div class="card-subtitle">All doctors</div>
-                <div class="card-divider"></div>
-                <div class="card-date">Start 25 march at 19:00</div>
-                <div class="card-price">
-                  from $260
+              <div class="course-card card-dark">
+                <span class="badge">Halol</span>
+                <div class="card-image">
+                  <img src="assets/course2.png" alt="Aedalpura Primary School">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Aedalpura Primary School</div>
+                  <div class="card-subtitle">Halol Cluster</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Updated: 29 March</div>
+                </div>
+              </div>
+              <div class="course-card card-black">
+                <span class="badge">Halol</span>
+                <div class="card-image">
+                  <img src="assets/course3.png" alt="Halol Public School">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Govindpuri Remedial(LIB)</div>
+                  <div class="card-subtitle">Halol Cluster</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Updated: 210 March</div>
                 </div>
               </div>
             </div>
-
-            <!-- Card 3 -->
-            <div class="course-card card-black">
-              <div class="card-image">
-                <img src="assets/course3.png" alt="Doctor and law">
-              </div>
-              <div class="card-content">
-                <div class="card-title">Dotor and law. Complete course.</div>
-                <div class="card-subtitle">Всем врачам</div>
-                <div class="card-divider"></div>
-                <div class="card-date">Start 25 march at 08:00</div>
-                <div class="card-price">
-                  from $620
-                </div>
-              </div>
-            </div>
+            <div class="fade-overlay"></div>
           </div>
+        </div>
+        <div id="maval-cluster" style="display: none;">
+          <div class="fade-out-container">
+            <div class="courses-grid">
+              <!-- Card 1 -->
+              <div class="course-card card-yellow">
+                <span class="badge">Maval Cluster</span>
+                <div class="card-image">
+                  <img src="assets/course3.png" alt="Evaluating patient">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Shri Chhtrapati Shivaji Vcidya Mandir, Kanhe</div>
+                  <div class="card-subtitle">Травматологи • Хирурги • Анестезиологи</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Start 25 march</div>
+                </div>
+              </div>
 
-          <!-- Second row placeholder fade -->
-          <div class="courses-grid hidden-row">
-            <!-- Card 4 placeholder -->
-            <div class="course-card">
-              <div class="card-image"><img src="assets/course3.png"></div>
+              <!-- Card 2 -->
+              <div class="course-card card-dark">
+                <span class="badge">Maval Cluster</span>
+                <div class="card-image">
+                  <img src="assets/course3.png" alt="Medical statistics">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Shriram Vidyalaya, Navalakh Umbre</div>
+                  <div class="card-subtitle">All Student</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Start 25 march</div>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="course-card card-black">
+                <span class="badge">Maval Cluster</span>
+                <div class="card-image">
+                  <img src="assets/course3.png" alt="Doctor and law">
+                </div>
+                <div class="card-content">
+                  <div class="card-title">Z P Primary Schoool, Bhoyare</div>
+                  <div class="card-subtitle">Всем врачам</div>
+                  <div class="card-divider"></div>
+                  <div class="card-date">Start 25 march at 08:00</div>
+                </div>
+              </div>
             </div>
-            <!-- Card 5 placeholder -->
-            <div class="course-card">
-              <div class="card-image"><img src="assets/course2.png"></div>
+
+            <!-- Second row placeholder fade -->
+            <div class="courses-grid hidden-row">
+              <!-- Card 4 placeholder -->
+              <div class="course-card">
+                <div class="card-image"><img src="assets/course3.png"></div>
+              </div>
+              <!-- Card 5 placeholder -->
+              <div class="course-card">
+                <div class="card-image"><img src="assets/course3.png"></div>
+              </div>
+              <!-- Card 6 placeholder -->
+              <div class="course-card">
+                <span class="badge">Maval Cluster</span>
+                <div class="card-image"><img src="assets/course3.png"></div>
+              </div>
             </div>
-            <!-- Card 6 placeholder -->
-            <div class="course-card">
-              <span class="badge">Баллы НМО</span>
-              <div class="card-image"><img src="assets/course1.png"></div>
-            </div>
+            <div class="fade-overlay"></div>
           </div>
-          <div class="fade-overlay"></div>
         </div>
 
         <div class="courses-footer">
@@ -1030,6 +1102,30 @@
       <div>Designed for FLN Initiative</div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btnHalol = document.getElementById("btn-halol");
+      const btnMaval = document.getElementById("btn-maval");
+      const halolCluster = document.getElementById("halol-cluster");
+      const mavalCluster = document.getElementById("maval-cluster");
+
+      btnHalol.addEventListener("click", () => {
+        btnHalol.classList.add("active");
+        btnMaval.classList.remove("active");
+        halolCluster.style.display = "block";
+        mavalCluster.style.display = "none";
+      });
+
+      btnMaval.addEventListener("click", () => {
+        btnMaval.classList.add("active");
+        btnHalol.classList.remove("active");
+        mavalCluster.style.display = "block";
+        halolCluster.style.display = "none";
+      });
+    });
+  </script>
 </body>
+
 
 </html>
