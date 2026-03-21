@@ -108,20 +108,32 @@ function renderFatalPageError(message) {
 
 function createSchoolCardElement(cluster, school) {
   const card = document.createElement('a');
-  card.className = 'school-card';
+  card.className = 'course-card card-yellow';
   card.href = buildUrlWithParams('class-progress.html', { cluster, school: school.name });
   card.dataset.cluster = cluster;
   card.dataset.school = school.name;
   card.setAttribute('aria-label', `Open ${school.name}`);
 
+  const badge = document.createElement('span');
+  badge.className = 'badge';
+  badge.textContent = cluster;
+
+  const content = document.createElement('div');
+  content.className = 'card-content';
+
   const title = document.createElement('h3');
+  title.className = 'card-title';
   title.textContent = school.name;
 
   const subtitle = document.createElement('p');
+  subtitle.className = 'card-subtitle';
   subtitle.textContent = 'Click to select';
 
-  card.appendChild(title);
-  card.appendChild(subtitle);
+  content.appendChild(title);
+  content.appendChild(subtitle);
+  
+  card.appendChild(badge);
+  card.appendChild(content);
 
   return card;
 }
