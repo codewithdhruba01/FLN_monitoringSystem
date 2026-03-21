@@ -102,15 +102,30 @@
             <div class="error-message">Please enter the number of students present</div>
           </div>
 
-          <div class="grid-2">
-            <div class="form-group">
-              <label for="totalGirls">Total Girls</label>
-              <input type="number" id="totalGirls" name="totalGirls" min="0" max="40" />
+          <div class="attendance-breakdown" id="attendanceBreakdown">
+            <div class="attendance-breakdown-header">
+              <h4>Attendance Breakdown</h4>
+              <p>Enter the number of boys and girls present for this school.</p>
             </div>
 
-            <div class="form-group">
-              <label for="totalBoys">Total Boys</label>
-              <input type="number" id="totalBoys" name="totalBoys" min="0" max="40" />
+            <div class="grid-2 attendance-breakdown-grid">
+              <div class="form-group">
+                <label for="boysPresent">
+                  Boys Present
+                  <span class="required">*</span>
+                </label>
+                <input type="number" id="boysPresent" name="boysPresent" min="0" max="40" required />
+                <div class="error-message">Please enter the number of boys present</div>
+              </div>
+
+              <div class="form-group">
+                <label for="girlsPresent">
+                  Girls Present
+                  <span class="required">*</span>
+                </label>
+                <input type="number" id="girlsPresent" name="girlsPresent" min="0" max="40" required />
+                <div class="error-message">Please enter the number of girls present</div>
+              </div>
             </div>
           </div>
         </div>
@@ -295,22 +310,32 @@
         </div>
 
         <!-- ================================================
-             SECTION E: FULL CLASS ATTENDANCE SHEET
+             SECTION E: STUDENT ATTENDANCE STATUS
              ================================================ -->
         <div class="card form-section">
-          <h3 class="section-title">Full Class Attendance Sheet</h3>
+          <h3 class="section-title">Student Attendance Status</h3>
 
           <p style="margin-bottom: 20px; font-size: 14px; color: #666666;">
-            Mark attendance for all students (Present / Absent).
+            Mark each child as present or absent for today.
           </p>
 
+          <div class="color-legend">
+            <div class="legend-item">
+              <div class="legend-box green"></div>
+              <span>Present</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box red"></div>
+              <span>Absent</span>
+            </div>
+          </div>
+
           <div class="table-container">
-            <table id="attendanceTable">
+            <table id="studentAttendanceTable">
               <thead>
                 <tr>
                   <th>Student Name</th>
-                  <th>Student ID</th>
-                  <th>Attendance</th>
+                  <th>Attendance Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -335,8 +360,8 @@
         </div>
 
         <!-- SUBMIT BUTTON -->
-        <div class="card" style="text-align: center; padding: 20px;">
-          <button type="submit" class="btn btn-primary btn-full">Submit Daily Monitoring Report</button>
+        <div class="card submit-card" id="submitCard" style="text-align: center; padding: 20px;">
+          <button type="submit" id="submitBtn" class="btn btn-primary btn-full" disabled>Submit Daily Monitoring Report</button>
         </div>
       </form>
     </main>

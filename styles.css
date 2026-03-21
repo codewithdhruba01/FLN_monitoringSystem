@@ -185,6 +185,7 @@ main {
 }
 
 .school-card {
+  display: block;
   background: var(--white);
   border: 2px solid var(--border-color);
   border-radius: var(--radius);
@@ -192,6 +193,8 @@ main {
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
 }
 
 .school-card:hover {
@@ -230,6 +233,34 @@ main {
 
 .form-group {
   margin-bottom: 20px;
+}
+
+.attendance-breakdown {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #f8fbff 0%, var(--white) 100%);
+}
+
+.attendance-breakdown-header {
+  margin-bottom: 16px;
+}
+
+.attendance-breakdown-header h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.attendance-breakdown-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.attendance-breakdown-grid {
+  margin-bottom: 0;
 }
 
 .form-group label {
@@ -400,6 +431,13 @@ input[type='checkbox'] {
   transform: translateY(0);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 .btn-full {
   width: 100%;
   padding: 14px;
@@ -468,6 +506,11 @@ table tbody tr:last-child td {
   gap: 8px;
 }
 
+.attendance-status {
+  display: flex;
+  gap: 10px;
+}
+
 .level-btn {
   flex: 1;
   padding: 8px;
@@ -515,15 +558,9 @@ table tbody tr:last-child td {
   border-color: var(--success-color);
 }
 
-/* Attendance Buttons */
-.attendance-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.attendance-btn {
-  flex: 1;
-  padding: 8px 10px;
+.status-btn {
+  min-width: 110px;
+  padding: 9px 14px;
   border: 2px solid var(--border-color);
   border-radius: 6px;
   background-color: var(--white);
@@ -531,32 +568,30 @@ table tbody tr:last-child td {
   font-size: 12px;
   font-weight: 600;
   transition: all 0.2s ease;
-  text-align: center;
-  user-select: none;
 }
 
-.attendance-btn:hover {
+.status-btn:hover {
   border-color: var(--primary-color);
 }
 
-.attendance-btn.present {
+.status-btn.status-present {
   color: var(--success-color);
 }
 
-.attendance-btn.present.selected {
+.status-btn.status-present.selected {
   background-color: var(--success-color);
-  color: var(--white);
   border-color: var(--success-color);
+  color: var(--white);
 }
 
-.attendance-btn.absent {
+.status-btn.status-absent {
   color: var(--danger-color);
 }
 
-.attendance-btn.absent.selected {
+.status-btn.status-absent.selected {
   background-color: var(--danger-color);
-  color: var(--white);
   border-color: var(--danger-color);
+  color: var(--white);
 }
 
 /* Color Legend */
@@ -711,6 +746,10 @@ footer a:hover {
   }
 
   .performance-level {
+    flex-direction: column;
+  }
+
+  .attendance-status {
     flex-direction: column;
   }
 
