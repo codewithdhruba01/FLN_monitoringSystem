@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Portal | FLN Monitoring</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #fcb900;
+      --black: #222222;
+      --dark-gray: #303030;
+      --bg-gray: #f2efe9;
+      --border-color: #222222;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      color: var(--black);
+      background-color: #ffffff;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 160px;
+      height: 70px;
+      border-bottom: 2px solid var(--border-color);
+      background: #fff;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-write {
+      background: var(--black);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Portal Hero Section */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 80px 80px 60px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .highlight-yellow {
+      background-color: var(--yellow);
+      padding: 0 8px;
+      display: inline-block;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.5;
+      max-width: 450px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .btn-hero {
+      border: 3px solid var(--black);
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 6px 6px 0px var(--black);
+      transition: transform 0.1s, box-shadow 0.1s;
+      text-decoration: none;
+    }
+
+    .btn-hero:active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0px var(--black);
+    }
+
+    .btn-hero.yellow {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .login-box {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .login-form {
+      background: #ffffff;
+      border: 3px solid var(--black);
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 12px 12px 0px var(--border-color);
+    }
+
+    .login-form h2 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 3px solid var(--border-color);
+      font-size: 16px;
+      font-weight: 500;
+      outline: none;
+      transition: background 0.2s;
+    }
+
+    .input-group input:focus {
+      background: var(--bg-gray);
+    }
+
+    .btn-login {
+      width: 100%;
+      background: var(--yellow);
+      color: var(--black);
+      border: 3px solid var(--black);
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 4px 4px 0px var(--black);
+      transition: transform 0.1s, box-shadow 0.1s;
+      margin-top: 10px;
+    }
+
+    .btn-login:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px var(--black);
+    }
+
+    /* Teacher Features Section */
+    .features-section {
+      padding: 80px;
+      background-color: var(--bg-gray);
+      border-top: 2px solid var(--border-color);
+    }
+
+    .features-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-card {
+      border: 3px solid var(--border-color);
+      padding: 32px;
+      background: #ffffff;
+      position: relative;
+      box-shadow: 8px 8px 0px var(--border-color);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 5px 5px 0px var(--border-color);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--black);
+      color: var(--yellow);
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 24px;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.5;
+      font-weight: 500;
+      flex-grow: 1;
+      margin-bottom: 24px;
+    }
+
+    .btn-feature {
+      text-align: left;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .btn-feature:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer Section */
+    .site-footer {
+      background-color: var(--black);
+      color: #ffffff;
+      padding: 80px 40px 40px 40px;
+      border-top: 4px solid var(--yellow);
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-brand h2 .logo-icon {
+      border: none;
+    }
+
+    .footer-brand p {
+      color: #ccc;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--yellow);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    .footer-col ul a:hover {
+      color: var(--yellow);
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 60px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #888;
+      font-size: 14px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="/index.html" class="logo">
+        <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+        FLN System
+      </a>
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="#">All Schools</a>
+        <a href="/teacher-portal.html" style="color: var(--yellow);">Teacher Portal</a>
+        <a href="/help-center.html">Help Center</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="social-icons">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z">
+          </path>
+        </svg>
+      </div>
+      <button class="btn-write" onclick="window.location.href='cluster.html'">
+        Start Now
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Portal Hero / Login Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>
+          Teacher<br>
+          <span class="highlight-yellow" style="font-size: 52px;">Portal</span>
+        </h1>
+        <p>Access your dashboard to manage classes, submit FLN monitoring reports, and track student progress with ease.</p>
+        <div class="hero-buttons">
+          <a href="#features" class="btn-hero yellow">
+            Explore Features
+          </a>
+        </div>
+      </div>
+      
+      <div class="login-box">
+        <div class="login-form">
+          <h2>Sign In</h2>
+          <div class="input-group">
+            <label for="email">Teacher Email / ID</label>
+            <input type="text" id="email" placeholder="Enter your email or ID">
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+          </div>
+          <button class="btn-login" onclick="event.preventDefault(); alert('Login Functionality Setup Pending');">Access Dashboard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teacher Features Section -->
+    <section class="features-section" id="features">
+      <div class="features-container">
+        <h2 class="features-header">Portal Features</h2>
+        <div class="features-grid">
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Clipboard check SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                <path d="M9 14l2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3>Daily Reports</h3>
+            <p>Submit your classroom's daily FLN implementation reports quickly using pre-filled forms specific to your cluster and school.</p>
+            <a href="cluster.html" class="btn-feature">Go to Forms 
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Users / Students SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Student Tracking</h3>
+            <p>Monitor individual student levels and identify those who need remedial support or advanced engagement in foundational literacy.</p>
+            <a href="#" class="btn-feature">View Students
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Activity / Analytics SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <h3>Performance Analytics</h3>
+            <p>Access real-time analytics dashboards to visualize your classroom's performance trends and academic progression over time.</p>
+            <a href="#" class="btn-feature">Analytics Dashboard
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Library / Resources SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <h3>Teaching Resources</h3>
+            <p>Browse through an extensive library of verified teaching materials, lesson plans, and instructional guides curated by experts.</p>
+            <a href="#" class="btn-feature">Access Library
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Calendar / Schedule SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <h3>Training Schedule</h3>
+            <p>Stay updated on upcoming cluster-level training sessions, webinars, and professional development workshops for educators.</p>
+            <a href="#" class="btn-feature">View Calendar
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="feature-card" style="background-color: var(--yellow);">
+            <div class="feature-icon" style="background: #ffffff; color: var(--black);">
+              <!-- Help Center SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <h3>Need Help?</h3>
+            <p>Can't figure out how to submit an assessment or lost your password? Visit the Help Center or contact support.</p>
+            <a href="help-center.html" class="btn-feature">Help Center
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>
+          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+          FLN System
+        </h2>
+        <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
+        <div class="social-icons">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z">
+            </path>
+          </svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+            </path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#">Daily Monitoring</a></li>
+            <li><a href="#">School Cluster</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="/teacher-portal.html">Teacher Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="/help-center.html">Help Center</a></li>
+            <li><a href="#">Training</a></li>
+            <li><a href="#">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Space ECE India Foundation. All rights reserved.</div>
+      <div>Designed for FLN Initiative</div>
+    </div>
+  </footer>
+
+</body>
+</html>
