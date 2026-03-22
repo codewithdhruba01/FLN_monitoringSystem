@@ -266,16 +266,16 @@
       height: 220px;
       background: #fff;
       border-bottom: 2px solid var(--border-color);
-      padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     .card-image img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .badge {
@@ -572,12 +572,31 @@
       padding: 100px 40px;
       background-color: var(--yellow);
       border-top: 2px solid var(--border-color);
-      text-align: center;
     }
 
     .cta-container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      text-align: left;
+    }
+
+    .cta-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .cta-image-wrapper {
+      flex-shrink: 0;
+    }
+
+    .cta-image-wrapper img {
+      max-width: 450px;
+      height: auto;
+      object-fit: contain;
     }
 
     .cta-container h2 {
@@ -712,6 +731,136 @@
       -webkit-mask-size: contain;
       -webkit-mask-repeat: no-repeat;
     }
+
+    /* Dashboard Highlights */
+    .dashboard-section {
+      padding: 80px;
+      background-color: var(--black);
+      border-top: 2px solid var(--border-color);
+      color: #fff;
+    }
+
+    .dashboard-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .dashboard-header h2 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+    }
+
+    .dash-card {
+      border: 3px solid var(--border-color);
+      background: var(--dark-gray);
+      padding: 32px;
+      box-shadow: 8px 8px 0px var(--yellow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .dash-card:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 6px 6px 0px var(--yellow);
+    }
+
+    .dash-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .dash-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .dash-value {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+
+    .dash-sub {
+      color: #aaa;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* Mock Bar Chart */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      height: 200px;
+      gap: 16px;
+      margin-top: 48px;
+      border-bottom: 2px solid #555;
+      padding-bottom: 8px;
+    }
+
+    .bar {
+      flex: 1;
+      background-color: var(--yellow);
+      border: 2px solid var(--black);
+      min-height: 20px;
+      position: relative;
+      transition: background-color 0.2s;
+    }
+
+    .bar:hover {
+      background-color: #fff;
+    }
+
+    .bar span {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #ccc;
+      font-weight: 600;
+    }
+
+    /* Mini Stats Grid */
+    .mini-stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .mini-stat-card {
+      border: 3px solid var(--border-color);
+      background: #ffffff;
+      color: var(--black);
+      padding: 32px;
+      box-shadow: 6px 6px 0px var(--yellow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .mini-stat-card .dash-title {
+      color: var(--black);
+    }
+
+    .mini-stat-card .dash-value {
+      color: var(--black);
+      font-size: 40px;
+    }
+
+    .mini-stat-card.yellow-bg {
+      background: var(--yellow);
+    }
   </style>
 </head>
 
@@ -780,6 +929,45 @@
       </div>
     </section>
 
+    <!-- Dashboard Highlights Section -->
+    <section class="dashboard-section">
+      <div class="dashboard-container">
+        <div class="dashboard-header">
+          <h2>Platform Analytics Highlights</h2>
+        </div>
+        <div class="dashboard-grid">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div class="dash-title">Student Performance Trajectory</div>
+              <div class="dash-sub">Last 6 Months</div>
+            </div>
+            <div class="dash-value">84% <span style="font-size:20px; color:#4ade80;">↑ 12%</span></div>
+            <div class="dash-sub">Progress reaching targeted foundational literacy goals</div>
+            <div class="bar-chart">
+              <div class="bar" style="height: 30%;"><span>Nov</span></div>
+              <div class="bar" style="height: 45%;"><span>Dec</span></div>
+              <div class="bar" style="height: 40%;"><span>Jan</span></div>
+              <div class="bar" style="height: 60%;"><span>Feb</span></div>
+              <div class="bar" style="height: 80%;"><span>Mar</span></div>
+              <div class="bar" style="height: 95%;"><span>Apr</span></div>
+            </div>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat-card">
+              <div class="dash-title">Total Schools Monitored</div>
+              <div class="dash-value" style="margin-top:16px;">1,204</div>
+              <div class="dash-sub" style="color: #666; margin-top:8px;">Active across clusters</div>
+            </div>
+            <div class="mini-stat-card yellow-bg">
+              <div class="dash-title">Daily Reports Logged</div>
+              <div class="dash-value" style="margin-top:16px;">45,892</div>
+              <div class="dash-sub" style="color: #222; margin-top:8px;">Updated today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="courses-section">
       <div class="courses-container">
         <div class="courses-header">
@@ -797,7 +985,7 @@
               <div class="course-card card-yellow">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course1.png" alt="Halol Primary School">
+                  <img src="assets/neo_school_1.png" alt="Halol Primary School">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Abhetlav Primary School</div>
@@ -809,7 +997,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course2.png" alt="Halol Secondary School">
+                  <img src="assets/School3.png" alt="Halol Secondary School">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Academy Centre - Masvad</div>
@@ -821,7 +1009,7 @@
               <div class="course-card card-black">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course3.png" alt="Halol High School">
+                  <img src="assets/neo_school_3.png" alt="Halol High School">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Academy Centre - Arad</div>
@@ -835,7 +1023,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course2.png" alt="Aedalpura Primary School">
+                  <img src="assets/neo_school_4.png" alt="Aedalpura Primary School">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Aedalpura Primary School</div>
@@ -847,7 +1035,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course2.png" alt="Aedalpura Primary School">
+                  <img src="assets/neo_school_2.png" alt="Aedalpura Primary School">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Aedalpura Primary School</div>
@@ -859,7 +1047,7 @@
               <div class="course-card card-black">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course3.png" alt="Halol Public School">
+                  <img src="assets/course2.png" alt="Halol Public School">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Govindpuri Remedial(LIB)</div>
@@ -879,7 +1067,7 @@
               <div class="course-card card-yellow">
                 <span class="badge">Maval Cluster</span>
                 <div class="card-image">
-                  <img src="assets/course3.png" alt="Evaluating patient">
+                  <img src="assets/course1.png" alt="Evaluating patient">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Shri Chhtrapati Shivaji Vcidya Mandir, Kanhe</div>
@@ -893,7 +1081,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Maval Cluster</span>
                 <div class="card-image">
-                  <img src="assets/course3.png" alt="Medical statistics">
+                  <img src="assets/School3.png" alt="Medical statistics">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Shriram Vidyalaya, Navalakh Umbre</div>
@@ -907,7 +1095,7 @@
               <div class="course-card card-black">
                 <span class="badge">Maval Cluster</span>
                 <div class="card-image">
-                  <img src="assets/course3.png" alt="Doctor and law">
+                  <img src="assets/School4.png" alt="Doctor and law">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Z P Primary Schoool, Bhoyare</div>
@@ -922,16 +1110,16 @@
             <div class="courses-grid hidden-row">
               <!-- Card 4 placeholder -->
               <div class="course-card">
-                <div class="card-image"><img src="assets/course3.png"></div>
+                <div class="card-image"><img src="assets/neo_school_1.png"></div>
               </div>
               <!-- Card 5 placeholder -->
               <div class="course-card">
-                <div class="card-image"><img src="assets/course3.png"></div>
+                <div class="card-image"><img src="assets/neo_school_2.png"></div>
               </div>
               <!-- Card 6 placeholder -->
               <div class="course-card">
                 <span class="badge">Maval Cluster</span>
-                <div class="card-image"><img src="assets/course3.png"></div>
+                <div class="card-image"><img src="assets/neo_school_3.png"></div>
               </div>
             </div>
             <div class="fade-overlay"></div>
@@ -1035,14 +1223,19 @@
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="cta-container">
-        <h2>Ready to transform your monitoring?</h2>
-        <p>Join hundreds of schools using our daily monitoring system to improve education outcomes.</p>
-        <button class="btn-cta" onclick="window.location.href='cluster.html'">Start Monitoring Now <svg width="24"
-            height="24" viewBox="0 0 24 24" fill="none" class="icon" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg></button>
+        <div class="cta-content">
+          <h2>Ready to transform your monitoring?</h2>
+          <p>Join hundreds of schools using our daily monitoring system to improve education outcomes.</p>
+          <button class="btn-cta" onclick="window.location.href='cluster.html'">Start Monitoring Now <svg width="24"
+              height="24" viewBox="0 0 24 24" fill="none" class="icon" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg></button>
+        </div>
+        <div class="cta-image-wrapper">
+          <img src="assets/Student.png" alt="Student Illustration">
+        </div>
       </div>
     </section>
   </main>
