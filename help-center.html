@@ -440,6 +440,160 @@
       flex-wrap: wrap;
       gap: 16px;
     }
+    /* =========================================
+       Responsive Utilities (Media Queries)
+       ========================================= */
+
+    /* Tablet (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      .navbar {
+        padding: 0 40px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding: 80px 40px;
+      }
+      .help-categories {
+        padding: 60px 40px;
+      }
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .faq-section {
+        padding: 60px 40px;
+      }
+      .cta-section {
+        padding: 80px 40px;
+      }
+      .footer-container {
+        gap: 40px;
+      }
+      .footer-links {
+        gap: 40px;
+      }
+    }
+
+    /* Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+      
+      .navbar {
+        padding: 0 16px;
+        height: 60px;
+      }
+      .nav-left {
+        gap: 12px;
+      }
+      .logo {
+        font-size: 15px;
+      }
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .nav-right {
+        gap: 8px;
+      }
+      .user-profile, .social-icons {
+        display: none;
+      }
+      .btn-write {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 40px 16px;
+      }
+      .hero h1 {
+        font-size: 36px;
+      }
+      .highlight-yellow {
+        font-size: 28px !important;
+      }
+      .hero p {
+        font-size: 15px;
+      }
+      .search-box {
+        flex-direction: column;
+        width: 100%;
+      }
+      .search-input {
+        width: 100%;
+        padding: 12px 16px;
+      }
+      .search-btn {
+        width: 100%;
+        padding: 12px;
+        border-left: none;
+        border-top: 3px solid var(--black);
+      }
+      
+      .help-categories {
+        padding: 40px 16px;
+      }
+      .section-header {
+        font-size: 32px;
+        margin-bottom: 32px;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .service-card {
+        padding: 24px;
+      }
+      .service-card h3 {
+        font-size: 20px;
+      }
+
+      .faq-section {
+        padding: 40px 16px;
+      }
+      .faq-question {
+        padding: 16px;
+        font-size: 16px;
+      }
+      .faq-answer {
+        font-size: 15px;
+      }
+      .faq-item.active .faq-answer {
+        padding: 16px;
+      }
+
+      .cta-section {
+        padding: 60px 16px;
+      }
+      .cta-container h2 {
+        font-size: 32px;
+      }
+      .cta-container p {
+        font-size: 16px;
+      }
+      .btn-cta {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-brand {
+        max-width: 100%;
+      }
+      .footer-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 32px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+    }
   </style>
 </head>
 

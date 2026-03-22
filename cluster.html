@@ -818,6 +818,98 @@
       font-weight: 600;
       margin-top: 8px;
     }
+
+    /* =========================================
+       Responsive Utilities (Media Queries)
+       ========================================= */
+
+    /* Tablet (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      .navbar {
+        padding: 0 40px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .footer-container {
+        gap: 40px;
+      }
+      .footer-links {
+        gap: 40px;
+      }
+    }
+
+    /* Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+      
+      .navbar {
+        padding: 0 16px;
+        height: 60px;
+      }
+      .nav-left {
+        gap: 12px;
+      }
+      .logo {
+        font-size: 15px;
+      }
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .nav-right {
+        gap: 8px;
+      }
+      .user-profile, .social-icons {
+        display: none;
+      }
+      .btn-write {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 40px 16px;
+      }
+      .page-heading h2 {
+        font-size: 32px;
+      }
+      .page-heading p {
+        font-size: 15px;
+      }
+      .card {
+        padding: 24px 20px;
+        width: calc(100% - 10px); /* prevent box-shadow overflow */
+      }
+      label {
+        font-size: 15px;
+      }
+      select {
+        font-size: 15px;
+        padding: 14px;
+      }
+      .btn-full {
+        font-size: 16px;
+        padding: 14px;
+      }
+      
+      .footer-brand {
+        max-width: 100%;
+      }
+      .footer-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 32px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+    }
   </style>
 </head>
 
