@@ -1,6 +1,6 @@
 # Setup For Others
 
-This guide explains how to run the FLN Monitoring System after receiving the project zip.
+This guide explains how to run the FLN Monitoring System after receiving the project folder or zip.
 
 ## Requirements
 
@@ -8,6 +8,7 @@ This guide explains how to run the FLN Monitoring System after receiving the pro
 - `Apache` started
 - `MySQL` started
 - Project folder extracted inside `C:\xampp\htdocs\`
+- Update [api/config.php](/c:/xampp/htdocs/FLN_monitoringSystem/api/config.php) if that computer uses a MySQL password
 
 Example project path:
 
@@ -50,7 +51,7 @@ Then:
 2. Choose the file [database/complete_migration.sql](/c:/xampp/htdocs/FLN_monitoringSystem/database/complete_migration.sql)
 3. Click `Go`
 
-This will create the database:
+This creates the database:
 
 ```text
 fln_monitoring
@@ -62,22 +63,24 @@ Make sure this Excel file is present in the project root:
 
 - [Students List Maval, Halol.xlsx](/c:/xampp/htdocs/FLN_monitoringSystem/Students%20List%20Maval,%20Halol.xlsx)
 
-Then open `Command Prompt` or `PowerShell` and run:
+Then run:
 
 ```powershell
 cd C:\xampp\htdocs\FLN_monitoringSystem
 C:\xampp\php\php.exe database\sync_workbook_data.php
 ```
 
-If it works, you should see:
+Expected success message:
 
 ```text
 Workbook data synced successfully.
 ```
 
+If you see a MySQL access error here, the credentials in [api/config.php](/c:/xampp/htdocs/FLN_monitoringSystem/api/config.php) do not match that computer's MySQL setup yet.
+
 ## 5. Open the project
 
-Open this URL in the browser:
+Open this URL:
 
 ```text
 http://localhost/FLN_monitoringSystem/cluster.html
@@ -95,8 +98,6 @@ Default values:
 - username: `root`
 - password: empty
 
-If the other person has a different MySQL username or password, they should update that file.
-
 ## If Something Does Not Work
 
 Check these first:
@@ -106,6 +107,11 @@ Check these first:
 - the database `fln_monitoring` exists
 - the workbook file is still in the project root
 - the project folder name is exactly `FLN_monitoringSystem`
+- the MySQL username and password in [api/config.php](/c:/xampp/htdocs/FLN_monitoringSystem/api/config.php) match that machine
+
+## Temporary Fallback
+
+If the database is not ready yet, the pages can still open with workbook-backed fallback data. Submitted reports will be stored only in that browser as a temporary backup until MySQL is configured correctly.
 
 ## Quick Setup Summary
 
