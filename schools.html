@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,7 +107,6 @@
       padding: 30px 160px 0;
       background: var(--bg-gray);
     }
-
     .breadcrumb {
       display: flex;
       align-items: center;
@@ -117,16 +115,13 @@
       font-weight: 600;
       color: #777;
     }
-
     .breadcrumb a {
       color: var(--black) !important;
       text-decoration: underline;
     }
-
     .breadcrumb a:hover {
       text-decoration: none;
     }
-
     .breadcrumb .active {
       color: var(--black);
       background: var(--yellow);
@@ -146,13 +141,11 @@
     .page-heading {
       margin-bottom: 40px;
     }
-
     .page-heading h2 {
       font-size: 40px;
       font-weight: 800;
       margin-bottom: 8px;
     }
-
     .page-heading p {
       font-size: 18px;
       color: #555;
@@ -177,12 +170,12 @@
       box-shadow: 6px 6px 0px var(--black);
       transition: transform 0.1s, box-shadow 0.1s;
     }
-
+    
     .course-card:hover {
       transform: translate(2px, 2px);
       box-shadow: 4px 4px 0px var(--black);
     }
-
+    
     .course-card:active {
       transform: translate(4px, 4px);
       box-shadow: 2px 2px 0px var(--black);
@@ -306,115 +299,10 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    /* =========================================
-       Responsive Utilities (Media Queries)
-       ========================================= */
-
-    /* Tablet (max-width: 1024px) */
-    @media (max-width: 1024px) {
-      .navbar {
-        padding: 0 40px;
-      }
-      .nav-links {
-        display: none;
-      }
-      .breadcrumb-container {
-        padding: 30px 40px 0;
-      }
-      .courses-section {
-        padding: 40px 40px 80px;
-      }
-      .courses-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .footer-container {
-        gap: 40px;
-      }
-      .footer-links {
-        gap: 40px;
-      }
-    }
-
-    /* Mobile (max-width: 768px) */
-    @media (max-width: 768px) {
-      html, body {
-        overflow-x: hidden;
-        width: 100%;
-      }
-      
-      .navbar {
-        padding: 0 16px;
-        height: 60px;
-      }
-      .nav-left {
-        gap: 12px;
-      }
-      .logo {
-        font-size: 15px;
-      }
-      .logo-icon {
-        width: 28px;
-        height: 28px;
-      }
-      .nav-right {
-        gap: 8px;
-      }
-      .user-profile, .social-icons {
-        display: none;
-      }
-      .btn-write {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-
-      .breadcrumb-container {
-        padding: 24px 16px 0;
-      }
-      .breadcrumb {
-        font-size: 13px;
-        flex-wrap: wrap;
-      }
-      
-      .courses-section {
-        padding: 32px 16px 60px;
-      }
-      .page-heading h2 {
-        font-size: 32px;
-      }
-      .page-heading p {
-        font-size: 15px;
-      }
-      .courses-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .card-content {
-        padding: 40px 20px 24px;
-      }
-      .card-title {
-        font-size: 20px;
-      }
-
-      .footer-brand {
-        max-width: 100%;
-      }
-      .footer-links {
-        flex-direction: column;
-        width: 100%;
-        gap: 32px;
-      }
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-      }
-    }
   </style>
 </head>
-
 <body data-page="schools">
-
+  
   <header class="navbar">
     <div class="nav-left">
       <div class="logo">
@@ -422,25 +310,20 @@
         FLN System
       </div>
       <div class="nav-links">
-        <a href="/index.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="#">All Schools</a>
-        <a href="/teacher-portal.html">Teacher</a>
-        <a href="/help-center.html">Help Center</a>
+        <a href="#">Teachers</a>
       </div>
     </div>
     <div class="nav-right">
       <div class="social-icons">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path
-            d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z">
-          </path>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z"></path>
         </svg>
       </div>
       <button class="btn-write" onclick="window.location.href='cluster.html'">
@@ -509,5 +392,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>

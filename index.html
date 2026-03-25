@@ -861,6 +861,7 @@
     .mini-stat-card.yellow-bg {
       background: var(--yellow);
     }
+
     /* =========================================
        Responsive Utilities (Media Queries)
        ========================================= */
@@ -870,44 +871,62 @@
       .navbar {
         padding: 0 40px;
       }
+
       .nav-links {
-        display: none; /* Hide links for a cleaner look on tablet unless a hamburger menu is added */
+        display: none;
+        /* Hide links for a cleaner look on tablet unless a hamburger menu is added */
       }
+
       .hero {
         padding: 60px 40px;
         flex-direction: column;
         text-align: center;
       }
+
       .hero-content {
         max-width: 100%;
         margin-bottom: 40px;
       }
+
       .hero p {
         margin: 0 auto;
       }
+
       .hero-buttons {
         justify-content: center;
       }
-      .courses-section, .services-section, .teachers-section, .dashboard-section {
+
+      .courses-section,
+      .services-section,
+      .teachers-section,
+      .dashboard-section {
         padding: 60px 40px;
       }
-      .courses-grid, .services-grid, .teachers-grid {
+
+      .courses-grid,
+      .services-grid,
+      .teachers-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .dashboard-grid {
         grid-template-columns: 1fr;
       }
+
       .cta-container {
         flex-direction: column;
         text-align: center;
         gap: 24px;
       }
+
       .cta-content {
         max-width: 100%;
       }
+
       .footer-container {
         gap: 40px;
       }
+
       .footer-links {
         gap: 40px;
       }
@@ -915,75 +934,99 @@
 
     /* Mobile (max-width: 768px) */
     @media (max-width: 768px) {
-      html, body {
+
+      html,
+      body {
         overflow-x: hidden;
         width: 100%;
       }
-      
+
       .navbar {
         padding: 0 16px;
         height: 60px;
       }
+
       .nav-left {
         gap: 12px;
       }
+
       .logo {
         font-size: 15px;
       }
+
       .logo-icon {
         width: 28px;
         height: 28px;
       }
+
       .nav-right {
         gap: 8px;
       }
-      .user-profile, .social-icons {
+
+      .user-profile,
+      .social-icons {
         display: none;
       }
+
       .btn-write {
         padding: 8px 12px;
         font-size: 12px;
       }
-      
+
       .hero {
         padding: 40px 16px;
       }
+
       .hero h1 {
         font-size: 36px;
       }
+
       .highlight-yellow {
         font-size: 28px !important;
       }
+
       .hero p {
         font-size: 15px;
       }
+
       .btn-hero {
         padding: 12px 20px;
         font-size: 14px;
         width: 100%;
         justify-content: center;
       }
+
       .hero-buttons {
         flex-direction: column;
         gap: 12px;
       }
-      
-      .courses-section, .services-section, .teachers-section, .dashboard-section {
+
+      .courses-section,
+      .services-section,
+      .teachers-section,
+      .dashboard-section {
         padding: 40px 16px;
       }
-      
-      .courses-header h2, .services-header h2, .teachers-header h2, .dashboard-header h2 {
+
+      .courses-header h2,
+      .services-header h2,
+      .teachers-header h2,
+      .dashboard-header h2 {
         font-size: 28px;
       }
 
-      .courses-grid, .services-grid, .teachers-grid, .mini-stats {
+      .courses-grid,
+      .services-grid,
+      .teachers-grid,
+      .mini-stats {
         grid-template-columns: 1fr;
         gap: 20px;
       }
-      
+
       .categories {
         flex-direction: column;
       }
+
       .cat-btn {
         width: 100%;
         text-align: center;
@@ -992,32 +1035,39 @@
       .dash-card {
         padding: 20px;
       }
+
       .dash-value {
         font-size: 32px;
       }
+
       .bar-chart {
         height: 150px;
         gap: 6px;
         margin-top: 24px;
       }
+
       .mini-stat-card {
         padding: 20px;
       }
-      
+
       .cta-section {
         padding: 60px 16px;
       }
+
       .cta-container h2 {
         font-size: 32px;
       }
+
       .cta-container p {
         font-size: 15px;
         margin-bottom: 24px;
       }
+
       .btn-cta {
         width: 100%;
         justify-content: center;
       }
+
       .cta-image-wrapper img {
         max-width: 100%;
         height: auto;
@@ -1026,11 +1076,13 @@
       .footer-brand {
         max-width: 100%;
       }
+
       .footer-links {
         flex-direction: column;
         width: 100%;
         gap: 32px;
       }
+
       .footer-bottom {
         flex-direction: column;
         text-align: center;
