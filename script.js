@@ -9,47 +9,52 @@ const API_ENDPOINTS = {
   saveMonitoring: 'api/save_monitoring.php',
 };
 
-const fallbackSchoolsData = {
+const workbookSchoolDirectory = {
   Halol: [
-    { id: 1, name: 'Halol Primary School' },
-    { id: 2, name: 'Halol Model School' },
-    { id: 3, name: 'Halol International School' },
+    { id: 1, name: 'Abhetlav Primary School', teachers: ['Anjaliben Manharbhai Varia'] },
+    { id: 2, name: 'Academy Centre - Masvad', teachers: ['Chavda Hansaben'] },
+    { id: 3, name: 'Academy Centre - Arad', teachers: ['Dharmeshsinh Parmar'] },
+    { id: 4, name: 'Academy Centre - Govind Puri', teachers: ['Divyaben Kesharsinh Rathod'] },
+    { id: 5, name: 'Aedalpura Primary School', teachers: ['Khumansinh Dolatsinh Solanki'] },
+    { id: 6, name: 'Govindpuri Remedial(LIB)', teachers: ['Lalita Ghojage'] },
+    { id: 7, name: 'Lalpuri Primary School', teachers: ['Manaharkumar Parmar'] },
+    { id: 8, name: 'Rahtlav Primary School', teachers: ['Mitulsinh Solanki'] },
+    { id: 9, name: 'Dhikva Primary School', teachers: ['Priyanka'] },
+    { id: 10, name: 'Kharkadi Primary School', teachers: ['Priyankaben'] },
+    { id: 11, name: 'Nava Jakhriya Primary School', teachers: ['Sanjana Parmar'] },
+    { id: 12, name: 'Pindgini Muvadi Primary School', teachers: ['Vishnubhai'] },
   ],
   Maval: [
-    { id: 4, name: 'Maval ZP School' },
-    { id: 5, name: 'Maval Central School' },
-    { id: 6, name: 'Maval High School' },
+    { id: 13, name: 'Shri Chhtrapati Shivaji Vcidya Mandir, Kanhe', teachers: ['Archana Shinde'] },
+    { id: 14, name: 'Shriram Vidyalaya, Navalakh Umbre', teachers: ['Bhagyashree Ganesh Marathe'] },
+    { id: 15, name: 'Z P Primary Schoool, Bhoyare', teachers: ['Kajal Bansode'] },
+    { id: 16, name: 'Z.P. Primary School,Ambi', teachers: ['Kalyani Thakur'] },
+    { id: 17, name: 'Z.P. Primary School, Badhalwadi', teachers: ['Komal Shirke'] },
+    { id: 18, name: 'Z.P.Primary School Nanoli Tarfe Chakan', teachers: ['Pooja Swapnil Bhosale'] },
+    { id: 19, name: 'Z.P. Primary School, Navlakh Umbre', teachers: ['Rupali Jambhulkar'] },
+    { id: 20, name: 'Z.P. Primary School, Urse', teachers: ['Sayali Sushant Chavan'] },
+    { id: 21, name: 'Z.P. Primary School, Varale', teachers: ['Sonali Gaikwad'] },
   ],
 };
 
-const fallbackTeachersData = [
-  { id: 1, name: 'Rajesh Kumar' },
-  { id: 2, name: 'Priya Singh' },
-  { id: 3, name: 'Arun Verma' },
-  { id: 4, name: 'Neha Sharma' },
-  { id: 5, name: 'Vikram Patel' },
-];
+const clusterTeachersData = Object.fromEntries(
+  Object.entries(workbookSchoolDirectory).map(([cluster, schools]) => [
+    cluster,
+    schools.flatMap((school) => school.teachers).filter((teacher, index, allTeachers) => allTeachers.indexOf(teacher) === index),
+  ]),
+);
 
-const fallbackStudents = [
-  { id: 1, name: 'Aarav Sharma' },
-  { id: 2, name: 'Vivaan Patel' },
-  { id: 3, name: 'Ananya Singh' },
-  { id: 4, name: 'Diya Verma' },
-  { id: 5, name: 'Aditya Kumar' },
-  { id: 6, name: 'Ishita Nair' },
-  { id: 7, name: 'Krish Yadav' },
-  { id: 8, name: 'Meera Joshi' },
-  { id: 9, name: 'Arjun Reddy' },
-  { id: 10, name: 'Saanvi Gupta' },
-  { id: 11, name: 'Reyansh Mehta' },
-  { id: 12, name: 'Kavya Iyer' },
-];
+const fallbackSchoolsData = Object.fromEntries(
+  Object.entries(workbookSchoolDirectory).map(([cluster, schools]) => [
+    cluster,
+    schools.map((school) => ({
+      id: school.id,
+      name: school.name,
+    })),
+  ]),
+);
 
-const gradesData = {
-  'Grade-I': ['I-A', 'I-B', 'I-C'],
-  'Grade-II': ['II-A', 'II-B', 'II-C'],
-  'Grade-III': ['III-A', 'III-B', 'III-C'],
-};
+const classOptions = ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8'];
 
 const reasonsData = ['Holiday', 'Assembly', 'Examination', 'Other'];
 const materialCheckboxes = ['Flashcards', 'Big Book', 'Workbook', 'Activity Kit', 'Blackboard', 'Other'];
@@ -82,6 +87,30 @@ const numeracyCategories = [
 ];
 
 let currentSchoolContext = null;
+
+function findWorkbookSchool(cluster, schoolName) {
+  return (workbookSchoolDirectory[cluster] || []).find((school) => school.name === schoolName) || null;
+}
+
+function createFallbackTeachers(cluster, schoolName = '') {
+  const schoolTeachers = findWorkbookSchool(cluster, schoolName)?.teachers || [];
+  const teacherNames = schoolTeachers.length > 0 ? schoolTeachers : clusterTeachersData[cluster] || [];
+
+  return teacherNames.map((teacherName, index) => ({
+    id: index + 1,
+    name: teacherName,
+  }));
+}
+
+function shouldUseDirectorySchools(cluster, apiSchools) {
+  const expectedSchools = fallbackSchoolsData[cluster] || [];
+
+  if (apiSchools.length !== expectedSchools.length) {
+    return true;
+  }
+
+  return expectedSchools.some((expectedSchool) => !apiSchools.some((school) => school.name === expectedSchool.name));
+}
 
 function getUrlParameter(name) {
   const params = new URLSearchParams(window.location.search);
@@ -127,7 +156,7 @@ function createSchoolCardElement(cluster, school) {
 
   const subtitle = document.createElement('p');
   subtitle.className = 'card-subtitle';
-  subtitle.textContent = 'Click to select';
+  subtitle.textContent = `${(clusterTeachersData[cluster] || []).length} cluster teachers available`;
 
   content.appendChild(title);
   content.appendChild(subtitle);
@@ -150,16 +179,27 @@ async function fetchJson(url, options = {}) {
 }
 
 async function loadSchoolsForCluster(cluster) {
+  const directorySchools = fallbackSchoolsData[cluster] || [];
+
   try {
     const payload = await fetchJson(`${API_ENDPOINTS.schools}?cluster=${encodeURIComponent(cluster)}`);
-    return payload.data.schools;
+    const apiSchools = payload.data.schools || [];
+
+    if (shouldUseDirectorySchools(cluster, apiSchools)) {
+      console.warn('Database school list does not match workbook school directory. Using workbook-backed list.');
+      return directorySchools;
+    }
+
+    return apiSchools;
   } catch (error) {
     console.warn('Unable to load schools from database. Using fallback school list.', error);
-    return fallbackSchoolsData[cluster] || [];
+    return directorySchools;
   }
 }
 
 async function loadSchoolContext(cluster, school) {
+  const localTeachers = createFallbackTeachers(cluster, school);
+
   try {
     const payload = await fetchJson(
       `${API_ENDPOINTS.schoolContext}?cluster=${encodeURIComponent(cluster)}&school=${encodeURIComponent(school)}`,
@@ -171,8 +211,8 @@ async function loadSchoolContext(cluster, school) {
     return {
       cluster: { id: cluster === 'Halol' ? 1 : 2, name: cluster },
       school: { id: null, name: school },
-      teachers: fallbackTeachersData,
-      students: fallbackStudents,
+      teachers: localTeachers,
+      students: [],
     };
   }
 }
@@ -287,6 +327,10 @@ async function initClassProgressPage() {
   }
 
   currentSchoolContext = await loadSchoolContext(cluster, school);
+  currentSchoolContext.school = currentSchoolContext.school || { id: null, name: school };
+  currentSchoolContext.teachers =
+    currentSchoolContext.teachers?.length > 0 ? currentSchoolContext.teachers : createFallbackTeachers(cluster, school);
+  currentSchoolContext.students = currentSchoolContext.students || [];
 
   const breadcrumb = document.querySelector('.breadcrumb');
   if (breadcrumb) {
@@ -304,14 +348,14 @@ async function initClassProgressPage() {
     heading.textContent = `Daily FLN Monitoring - ${school}`;
   }
 
-  populateTeacherDropdown(currentSchoolContext.teachers || fallbackTeachersData);
+  populateTeacherDropdown(currentSchoolContext.teachers || []);
   populateGradeDropdown();
+  prefillGradeRangeFromStudents();
   populateDateField();
   setupAttendanceBreakdown(cluster);
   populateRadioAndCheckboxGroups();
   populateFocusDropdowns();
-  populateStudentTable(currentSchoolContext.students || fallbackStudents);
-  populateAttendanceTable(currentSchoolContext.students || fallbackStudents);
+  renderFilteredStudentTables();
   setupFormSubmission();
   updateSubmitButtonState();
 }
@@ -326,21 +370,51 @@ function populateTeacherDropdown(teachers) {
 }
 
 function populateGradeDropdown() {
-  const gradeSelect = document.getElementById('grade');
-  const sectionSelect = document.getElementById('section');
+  const gradeStartSelect = document.getElementById('gradeStart');
+  const gradeEndSelect = document.getElementById('gradeEnd');
 
-  if (gradeSelect) {
-    gradeSelect.innerHTML =
-      '<option value="">-- Select Grade --</option>' +
-      Object.keys(gradesData)
-        .map((grade) => `<option value="${grade}">${grade}</option>`)
-        .join('');
-
-    gradeSelect.addEventListener('change', updateSectionDropdown);
+  if (!gradeStartSelect || !gradeEndSelect) {
+    return;
   }
 
-  if (sectionSelect) {
-    sectionSelect.innerHTML = '<option value="">-- Select Section --</option>';
+  const renderOptions = (select, options, placeholder) => {
+    select.innerHTML = [placeholder]
+      .concat(options.map((option) => `<option value="${option}">${option}</option>`))
+      .join('');
+  };
+
+  renderOptions(gradeStartSelect, classOptions, '<option value="">-- Select Class --</option>');
+  renderOptions(gradeEndSelect, classOptions, '<option value="">-- Select Class --</option>');
+
+  gradeStartSelect.onchange = updateGradeRangeDropdowns;
+  gradeEndSelect.onchange = updateGradeRangeDropdowns;
+}
+
+function prefillGradeRangeFromStudents() {
+  const gradeStartSelect = document.getElementById('gradeStart');
+  const gradeEndSelect = document.getElementById('gradeEnd');
+
+  if (!gradeStartSelect || !gradeEndSelect || !currentSchoolContext?.students?.length) {
+    return;
+  }
+
+  const classNumbers = currentSchoolContext.students
+    .map((student) => getClassNumber(student.className))
+    .filter((value) => value !== null)
+    .sort((left, right) => left - right);
+
+  if (classNumbers.length === 0) {
+    return;
+  }
+
+  if (!gradeStartSelect.value) {
+    gradeStartSelect.value = `Class ${classNumbers[0]}`;
+  }
+
+  updateGradeRangeDropdowns();
+
+  if (!gradeEndSelect.value) {
+    gradeEndSelect.value = `Class ${classNumbers[classNumbers.length - 1]}`;
   }
 }
 
@@ -467,31 +541,130 @@ function setupAttendanceBreakdown(cluster) {
   }
 
   totalInput.readOnly = true;
-
-  const syncTotalStudents = () => {
-    const boysCount = parseInt(boysInput.value, 10) || 0;
-    const girlsCount = parseInt(girlsInput.value, 10) || 0;
-    const total = boysCount + girlsCount;
-    totalInput.value = total > 0 ? total : '';
-  };
-
-  boysInput.addEventListener('input', syncTotalStudents);
-  girlsInput.addEventListener('input', syncTotalStudents);
+  boysInput.readOnly = true;
+  girlsInput.readOnly = true;
 }
 
-function updateSectionDropdown() {
-  const gradeSelect = document.getElementById('grade');
-  const sectionSelect = document.getElementById('section');
-  const selectedGrade = gradeSelect.value;
+function updateGradeRangeDropdowns() {
+  const gradeStartSelect = document.getElementById('gradeStart');
+  const gradeEndSelect = document.getElementById('gradeEnd');
 
-  if (!selectedGrade || !gradesData[selectedGrade]) {
-    sectionSelect.innerHTML = '<option value="">-- Select Section --</option>';
+  if (!gradeStartSelect || !gradeEndSelect) {
     return;
   }
 
-  sectionSelect.innerHTML =
-    '<option value="">-- Select Section --</option>' +
-    gradesData[selectedGrade].map((section) => `<option value="${section}">${section}</option>`).join('');
+  const selectedStartIndex = classOptions.indexOf(gradeStartSelect.value);
+  const allowedEndOptions = selectedStartIndex === -1 ? classOptions : classOptions.slice(selectedStartIndex);
+  const previousEndValue = gradeEndSelect.value;
+
+  gradeEndSelect.innerHTML =
+    '<option value="">-- Select Class --</option>' +
+    allowedEndOptions.map((grade) => `<option value="${grade}">${grade}</option>`).join('');
+
+  if (allowedEndOptions.includes(previousEndValue)) {
+    gradeEndSelect.value = previousEndValue;
+  }
+
+  if (gradeEndSelect.value && classOptions.indexOf(gradeEndSelect.value) < selectedStartIndex) {
+    gradeEndSelect.value = '';
+  }
+
+  gradeStartSelect.closest('.form-group')?.classList.remove('field-error');
+  gradeStartSelect.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
+  gradeEndSelect.closest('.form-group')?.classList.remove('field-error');
+  gradeEndSelect.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
+
+  renderFilteredStudentTables();
+}
+
+function getSelectedGradeRange() {
+  const gradeStart = document.getElementById('gradeStart')?.value || '';
+  const gradeEnd = document.getElementById('gradeEnd')?.value || '';
+
+  if (!gradeStart || !gradeEnd) {
+    return '';
+  }
+
+  return gradeStart === gradeEnd ? gradeStart : `${gradeStart} - ${gradeEnd}`;
+}
+
+function isGradeRangeValid() {
+  const gradeStart = document.getElementById('gradeStart')?.value || '';
+  const gradeEnd = document.getElementById('gradeEnd')?.value || '';
+
+  if (!gradeStart || !gradeEnd) {
+    return false;
+  }
+
+  return classOptions.indexOf(gradeStart) <= classOptions.indexOf(gradeEnd);
+}
+
+function getClassNumber(value) {
+  const match = String(value || '').match(/(\d+)/);
+  return match ? parseInt(match[1], 10) : null;
+}
+
+function getFilteredStudents() {
+  const gradeStart = getClassNumber(document.getElementById('gradeStart')?.value);
+  const gradeEnd = getClassNumber(document.getElementById('gradeEnd')?.value);
+
+  if (!gradeStart || !gradeEnd || !isGradeRangeValid()) {
+    return currentSchoolContext?.students || [];
+  }
+
+  return currentSchoolContext.students.filter((student) => {
+    const studentClass = getClassNumber(student.className);
+    return studentClass !== null && studentClass >= gradeStart && studentClass <= gradeEnd;
+  });
+}
+
+function renderFilteredStudentTables() {
+  const filteredStudents = getFilteredStudents();
+  populateStudentTable(filteredStudents);
+  populateAttendanceTable(filteredStudents);
+  updateAttendanceTotals();
+  updateSubmitButtonState();
+}
+
+function updateAttendanceTotals() {
+  const totalInput = document.getElementById('studentsPresent');
+  const boysInput = document.getElementById('boysPresent');
+  const girlsInput = document.getElementById('girlsPresent');
+
+  if (!totalInput || !boysInput || !girlsInput) {
+    return;
+  }
+
+  const attendanceRows = Array.from(document.querySelectorAll('#studentAttendanceTable tbody tr[data-student-id]'));
+  let totalPresent = 0;
+  let boysPresent = 0;
+  let girlsPresent = 0;
+
+  attendanceRows.forEach((row) => {
+    const selectedStatus = row.querySelector('.status-btn.selected')?.dataset.status;
+    if (selectedStatus !== 'present') {
+      return;
+    }
+
+    totalPresent += 1;
+    if (row.dataset.studentGender === 'Boy') {
+      boysPresent += 1;
+      return;
+    }
+
+    girlsPresent += 1;
+  });
+
+  totalInput.value = totalPresent > 0 ? String(totalPresent) : '';
+  boysInput.value = boysPresent > 0 ? String(boysPresent) : '';
+  girlsInput.value = girlsPresent > 0 ? String(girlsPresent) : '';
+
+  totalInput.closest('.form-group')?.classList.remove('field-error');
+  boysInput.closest('.form-group')?.classList.remove('field-error');
+  girlsInput.closest('.form-group')?.classList.remove('field-error');
+  totalInput.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
+  boysInput.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
+  girlsInput.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
 }
 
 function updateReasonVisibility() {
@@ -514,11 +687,22 @@ function populateStudentTable(students) {
   const tbody = document.querySelector('#studentTable tbody');
   if (!tbody) return;
 
+  if (students.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">Select a class or class range to load students.</td>
+      </tr>
+    `;
+    return;
+  }
+
   tbody.innerHTML = students
     .map(
       (student, index) => `
-        <tr data-student-id="${student.id}" data-student-number="${index + 1}">
+        <tr data-student-id="${student.id}" data-student-number="${index + 1}" data-student-gender="${student.gender || 'Girl'}">
           <td>${student.name}</td>
+          <td>${student.gender || 'Girl'}</td>
+          <td>${student.className || ''}</td>
           <td>
             <div class="performance-level">
               <button type="button" class="level-btn level-1" data-student="${student.id}" data-level="1" onclick="selectPerformanceLevel(this)">1</button>
@@ -542,11 +726,22 @@ function populateAttendanceTable(students) {
   const tbody = document.querySelector('#studentAttendanceTable tbody');
   if (!tbody) return;
 
+  if (students.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="4">Select a class or class range to load students.</td>
+      </tr>
+    `;
+    return;
+  }
+
   tbody.innerHTML = students
     .map(
       (student, index) => `
-        <tr data-student-id="${student.id}" data-student-number="${index + 1}">
+        <tr data-student-id="${student.id}" data-student-number="${index + 1}" data-student-gender="${student.gender || 'Girl'}">
           <td>${student.name}</td>
+          <td>${student.gender || 'Girl'}</td>
+          <td>${student.className || ''}</td>
           <td>
             <div class="attendance-status">
               <button
@@ -583,6 +778,7 @@ function selectPerformanceLevel(btn) {
 
   btn.classList.add('selected');
   btn.closest('tr')?.classList.remove('field-error');
+  updateAttendanceTotals();
   updateSubmitButtonState();
 }
 
@@ -600,8 +796,8 @@ function selectAttendanceStatus(btn) {
 function isFormComplete() {
   const requiredFields = [
     'teacher',
-    'grade',
-    'section',
+    'gradeStart',
+    'gradeEnd',
     'date',
     'studentsPresent',
     'boysPresent',
@@ -638,6 +834,10 @@ function isFormComplete() {
   const studentsPresent = parseInt(document.getElementById('studentsPresent')?.value || '0', 10);
 
   if (boysPresent + girlsPresent !== studentsPresent) {
+    return false;
+  }
+
+  if (!isGradeRangeValid()) {
     return false;
   }
 
@@ -740,8 +940,8 @@ function buildFormPayload() {
     schoolId: currentSchoolContext?.school?.id || null,
     teacherId: teacherSelect.value ? parseInt(teacherSelect.value, 10) : null,
     teacherName: teacherSelect.options[teacherSelect.selectedIndex]?.text || '',
-    grade: document.getElementById('grade').value,
-    section: document.getElementById('section').value,
+    grade: getSelectedGradeRange(),
+    section: '',
     date: document.getElementById('date').value,
     studentsPresent: parseInt(document.getElementById('studentsPresent').value, 10),
     boysPresent: parseInt(document.getElementById('boysPresent').value, 10),
@@ -769,8 +969,8 @@ async function handleFormSubmit(event) {
   let isValid = true;
   const requiredFields = [
     'teacher',
-    'grade',
-    'section',
+    'gradeStart',
+    'gradeEnd',
     'date',
     'studentsPresent',
     'boysPresent',
@@ -790,6 +990,11 @@ async function handleFormSubmit(event) {
     if (field && !validateField(field)) {
       isValid = false;
     }
+  }
+
+  if (!isGradeRangeValid()) {
+    showError('gradeEnd', 'Ending class must be the same as or after starting class');
+    isValid = false;
   }
 
   const boysPresent = parseInt(document.getElementById('boysPresent')?.value || '0', 10);
@@ -857,8 +1062,11 @@ async function handleFormSubmit(event) {
     showSuccessMessage(payload.message || 'Form submitted successfully and saved to MySQL.');
     document.getElementById('classProgressForm')?.reset();
     document.querySelectorAll('.selected').forEach((element) => element.classList.remove('selected'));
+    populateGradeDropdown();
+    prefillGradeRangeFromStudents();
     updateReasonVisibility();
     populateDateField();
+    renderFilteredStudentTables();
     updateSubmitButtonState();
   } catch (error) {
     console.error('Failed to save monitoring report to database.', error);

@@ -60,37 +60,37 @@
             </div>
 
             <div class="form-group">
-              <label for="grade">
-                Grade
+              <label for="gradeStart">
+                Class From
                 <span class="required">*</span>
               </label>
-              <select id="grade" name="grade" required>
-                <option value="">-- Select Grade --</option>
+              <select id="gradeStart" name="gradeStart" required>
+                <option value="">-- Select Class --</option>
               </select>
-              <div class="error-message">Please select a grade</div>
+              <div class="error-message">Please select the starting class</div>
             </div>
           </div>
 
           <div class="grid-2">
             <div class="form-group">
-              <label for="section">
-                Section
+              <label for="gradeEnd">
+                Class To
                 <span class="required">*</span>
               </label>
-              <select id="section" name="section" required>
-                <option value="">-- Select Section --</option>
+              <select id="gradeEnd" name="gradeEnd" required>
+                <option value="">-- Select Class --</option>
               </select>
-              <div class="error-message">Please select a section</div>
+              <div class="error-message">Please select the ending class</div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="date">
-                Date
-                <span class="required">*</span>
-              </label>
-              <input type="date" id="date" name="date" required />
-              <div class="error-message">Please select a date</div>
-            </div>
+          <div class="form-group">
+            <label for="date">
+              Date
+              <span class="required">*</span>
+            </label>
+            <input type="date" id="date" name="date" required />
+            <div class="error-message">Please select a date</div>
           </div>
 
           <div class="form-group">
@@ -99,13 +99,13 @@
               <span class="required">*</span>
             </label>
             <input type="number" id="studentsPresent" name="studentsPresent" min="0" max="40" required />
-            <div class="error-message">Please enter the number of students present</div>
+            <div class="error-message">Attendance selection will calculate total present automatically</div>
           </div>
 
           <div class="attendance-breakdown" id="attendanceBreakdown">
             <div class="attendance-breakdown-header">
               <h4>Attendance Breakdown</h4>
-              <p>Enter the number of boys and girls present for this school.</p>
+              <p>Boys and girls present are calculated automatically from the attendance marks below.</p>
             </div>
 
             <div class="grid-2 attendance-breakdown-grid">
@@ -115,7 +115,7 @@
                   <span class="required">*</span>
                 </label>
                 <input type="number" id="boysPresent" name="boysPresent" min="0" max="40" required />
-                <div class="error-message">Please enter the number of boys present</div>
+                <div class="error-message">Attendance selection will calculate boys present automatically</div>
               </div>
 
               <div class="form-group">
@@ -124,7 +124,7 @@
                   <span class="required">*</span>
                 </label>
                 <input type="number" id="girlsPresent" name="girlsPresent" min="0" max="40" required />
-                <div class="error-message">Please enter the number of girls present</div>
+                <div class="error-message">Attendance selection will calculate girls present automatically</div>
               </div>
             </div>
           </div>
@@ -298,6 +298,8 @@
               <thead>
                 <tr>
                   <th>Student Name</th>
+                  <th>Gender</th>
+                  <th>Class</th>
                   <th>Performance Level</th>
                   <th>Needs Support</th>
                 </tr>
@@ -335,6 +337,8 @@
               <thead>
                 <tr>
                   <th>Student Name</th>
+                  <th>Gender</th>
+                  <th>Class</th>
                   <th>Attendance Status</th>
                 </tr>
               </thead>

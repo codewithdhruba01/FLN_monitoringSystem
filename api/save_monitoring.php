@@ -19,7 +19,6 @@ try {
         'school',
         'teacherId',
         'grade',
-        'section',
         'date',
         'studentsPresent',
         'boysPresent',
@@ -112,7 +111,7 @@ try {
         'school_id' => (int) $school['school_id'],
         'teacher_id' => (int) $data['teacherId'],
         'grade_name' => $data['grade'],
-        'section_name' => $data['section'],
+        'section_name' => $data['section'] ?? '',
         'monitoring_date' => $data['date'],
         'students_present' => (int) $data['studentsPresent'],
         'boys_present' => (int) $data['boysPresent'],
@@ -132,21 +131,25 @@ try {
     $reportId = (int) $pdo->lastInsertId();
 
     $insertMaterial = $pdo->prepare(
-        'INSERT INTO monitoring_materials (report_id, material_name) VALUES (:report_id, :material_name)'
+        'INSERT INTO monitoring_materials (report_id, cluster_id, school_id, material_name) VALUES (:report_id, :cluster_id, :school_id, :material_name)'
     );
     foreach (($data['materials'] ?? []) as $material) {
         $insertMaterial->execute([
             'report_id' => $reportId,
+            'cluster_id' => (int) $school['cluster_id'],
+            'school_id' => (int) $school['school_id'],
             'material_name' => $material,
         ]);
     }
 
     $insertSubject = $pdo->prepare(
-        'INSERT INTO monitoring_subjects (report_id, subject_name) VALUES (:report_id, :subject_name)'
+        'INSERT INTO monitoring_subjects (report_id, cluster_id, school_id, subject_name) VALUES (:report_id, :cluster_id, :school_id, :subject_name)'
     );
     foreach (($data['subjects'] ?? []) as $subject) {
         $insertSubject->execute([
             'report_id' => $reportId,
+            'cluster_id' => (int) $school['cluster_id'],
+            'school_id' => (int) $school['school_id'],
             'subject_name' => $subject,
         ]);
     }
