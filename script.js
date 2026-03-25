@@ -790,6 +790,7 @@ function selectAttendanceStatus(btn) {
 
   btn.classList.add('selected');
   btn.closest('tr')?.classList.remove('field-error');
+  updateAttendanceTotals();
   updateSubmitButtonState();
 }
 
@@ -963,6 +964,26 @@ function buildFormPayload() {
   };
 }
 
+function storeSubmissionBackup(formData, errorMessage) {
+  const storageKey = 'flnMonitoringPendingReports';
+  const backupEntry = {
+    savedAt: new Date().toISOString(),
+    errorMessage,
+    formData,
+  };
+
+  try {
+    const existingBackups = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    const backups = Array.isArray(existingBackups) ? existingBackups : [];
+    backups.unshift(backupEntry);
+    localStorage.setItem(storageKey, JSON.stringify(backups.slice(0, 25)));
+    return backups.length;
+  } catch (storageError) {
+    console.error('Unable to store browser backup for monitoring report.', storageError);
+    return 0;
+  }
+}
+
 async function handleFormSubmit(event) {
   event.preventDefault();
 
@@ -1070,7 +1091,13 @@ async function handleFormSubmit(event) {
     updateSubmitButtonState();
   } catch (error) {
     console.error('Failed to save monitoring report to database.', error);
-    showSuccessMessage(`Database save failed: ${error.message}`, true);
+    const backupCount = storeSubmissionBackup(formData, error.message);
+    showSuccessMessage(
+      backupCount > 0
+        ? `Database is unavailable right now. This report was saved in this browser as a backup (${backupCount} stored).`
+        : `Database is unavailable right now, and the browser backup could not be stored. ${error.message}`,
+      backupCount > 0 ? 'warning' : 'error',
+    );
   } finally {
     if (submitBtn) {
       submitBtn.textContent = 'Submit Daily Monitoring Report';
@@ -1079,14 +1106,15 @@ async function handleFormSubmit(event) {
   }
 }
 
-function showSuccessMessage(message, isError = false) {
+function showSuccessMessage(message, tone = 'success') {
+  const backgroundColor = tone === 'error' ? '#F44336' : tone === 'warning' ? '#FB8C00' : '#4CAF50';
   const messageEl = document.createElement('div');
   messageEl.style.cssText = `
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: ${isError ? '#F44336' : '#4CAF50'};
+    background: ${backgroundColor};
     color: white;
     padding: 20px 30px;
     border-radius: 8px;

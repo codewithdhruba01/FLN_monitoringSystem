@@ -62,6 +62,28 @@ try {
         throw new RuntimeException('Selected school does not exist in the database.');
     }
 
+    $studentIdLookup = $pdo->prepare(
+        'SELECT id
+         FROM students
+         WHERE school_id = :school_id'
+    );
+    $studentIdLookup->execute([
+        'school_id' => (int) $school['school_id'],
+    ]);
+    $validStudentIds = [];
+    foreach ($studentIdLookup->fetchAll(PDO::FETCH_COLUMN) as $studentId) {
+        $validStudentIds[(int) $studentId] = true;
+    }
+
+    $sanitizeStudentId = static function ($studentId) use ($validStudentIds): ?int {
+        if (empty($studentId)) {
+            return null;
+        }
+
+        $normalizedStudentId = (int) $studentId;
+        return isset($validStudentIds[$normalizedStudentId]) ? $normalizedStudentId : null;
+    };
+
     $insertReport = $pdo->prepare(
         'INSERT INTO monitoring_reports (
             cluster_id,
@@ -180,7 +202,7 @@ try {
             'report_id' => $reportId,
             'cluster_id' => (int) $school['cluster_id'],
             'school_id' => (int) $school['school_id'],
-            'student_id' => !empty($studentPerformance['studentId']) ? (int) $studentPerformance['studentId'] : null,
+            'student_id' => $sanitizeStudentId($studentPerformance['studentId'] ?? null),
             'student_number' => (int) $studentPerformance['studentNumber'],
             'student_name' => $studentPerformance['name'],
             'performance_level' => (int) $studentPerformance['performanceLevel'],
@@ -212,7 +234,7 @@ try {
             'report_id' => $reportId,
             'cluster_id' => (int) $school['cluster_id'],
             'school_id' => (int) $school['school_id'],
-            'student_id' => !empty($studentAttendance['studentId']) ? (int) $studentAttendance['studentId'] : null,
+            'student_id' => $sanitizeStudentId($studentAttendance['studentId'] ?? null),
             'student_number' => (int) $studentAttendance['studentNumber'],
             'student_name' => $studentAttendance['name'],
             'attendance_status' => $studentAttendance['attendanceStatus'],
