@@ -702,6 +702,11 @@
       gap: 16px;
     }
 
+    .footer-bottom a {
+      color: #fff;
+      text-decoration: none;
+    }
+
     /* Icons placeholder styles */
     .icon {
       display: inline-block;
@@ -817,6 +822,116 @@
       font-size: 14px;
       font-weight: 600;
       margin-top: 8px;
+    }
+
+    /* =========================================
+       Responsive Utilities (Media Queries)
+       ========================================= */
+
+    /* Tablet (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      .navbar {
+        padding: 0 40px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-container {
+        padding: 0 40px;
+        gap: 40px;
+      }
+
+      main {
+        padding: 60px 40px;
+      }
+    }
+
+    /* Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+
+      html,
+      body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      .navbar {
+        padding: 0 16px;
+        height: 60px;
+      }
+
+      .nav-left {
+        gap: 12px;
+      }
+
+      .logo {
+        font-size: 15px;
+      }
+
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .nav-right {
+        gap: 8px;
+      }
+
+      .social-icons {
+        display: none;
+      }
+
+      .btn-write {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 40px 16px;
+      }
+
+      .page-heading h2 {
+        font-size: 30px;
+      }
+
+      .page-heading p {
+        font-size: 15px;
+      }
+
+      .card {
+        padding: 24px;
+        box-shadow: 4px 4px 0px #000;
+      }
+
+      .site-footer {
+        padding: 40px 16px 20px 16px;
+      }
+
+      .footer-container {
+        padding: 0;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .footer-brand,
+      .footer-links {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .footer-links {
+        gap: 32px;
+        flex-direction: column;
+      }
+
+      .footer-bottom {
+        margin-top: 40px;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
     }
   </style>
 </head>
@@ -937,7 +1052,7 @@
     </div>
     <div class="footer-bottom">
       <div>&copy; 2026 Space ECE India Foundation. All rights reserved.</div>
-      <div>Designed for FLN Initiative</div>
+      <div>Designed and Developed by <a href="https://codewithdhruba.in/" target="_blank">Dhrubaraj Pati</a></div>
     </div>
   </footer>
 
