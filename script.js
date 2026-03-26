@@ -285,7 +285,7 @@ async function initSchoolsPage() {
   const breadcrumb = document.querySelector('.breadcrumb');
   if (breadcrumb) {
     breadcrumb.innerHTML = `
-      <div class="breadcrumb-item"><a href="cluster.html" style="color: #1E88E5; cursor: pointer;">Cluster</a></div>
+      <div class="breadcrumb-item"><a href="cluster.html" style="cursor: pointer;">Cluster</a></div>
       <div class="breadcrumb-separator">></div>
       <div class="breadcrumb-item active">School</div>
       <div class="breadcrumb-separator">></div>
@@ -335,9 +335,9 @@ async function initClassProgressPage() {
   const breadcrumb = document.querySelector('.breadcrumb');
   if (breadcrumb) {
     breadcrumb.innerHTML = `
-      <div class="breadcrumb-item"><a href="cluster.html" style="color: #1E88E5; cursor: pointer;">Cluster</a></div>
+      <div class="breadcrumb-item"><a href="cluster.html" style="cursor: pointer;">Cluster</a></div>
       <div class="breadcrumb-separator">></div>
-      <div class="breadcrumb-item"><a href="schools.html?cluster=${encodeURIComponent(cluster)}" style="color: #1E88E5; cursor: pointer;">School</a></div>
+      <div class="breadcrumb-item"><a href="schools.html?cluster=${encodeURIComponent(cluster)}" style="cursor: pointer;">School</a></div>
       <div class="breadcrumb-separator">></div>
       <div class="breadcrumb-item active">Class Progress</div>
     `;
