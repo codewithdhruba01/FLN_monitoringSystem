@@ -1,188 +1,666 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Class Progress - FLN Daily Monitoring System</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --yellow: #fcb900;
-        --black: #222222;
-        --dark-gray: #303030;
-        --bg-gray: #f2efe9;
-        --border-color: #222222;
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Class Progress - FLN Daily Monitoring System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #fcb900;
+      --black: #222222;
+      --dark-gray: #303030;
+      --bg-gray: #f2efe9;
+      --border-color: #222222;
+    }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-      body {
-        color: var(--black);
-        background-color: #ffffff;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+    body {
+      color: var(--black);
+      background-color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-      /* Navbar */
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 160px;
+      height: 70px;
+      border-bottom: 2px solid var(--border-color);
+      background: #fff;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-write {
+      background: var(--black);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-container {
+      padding: 30px 160px 0;
+      background: var(--bg-gray);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #777;
+    }
+
+    .breadcrumb a {
+      color: var(--black) !important;
+      text-decoration: underline;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: none;
+    }
+
+    .breadcrumb .active {
+      color: var(--black);
+      background: var(--yellow);
+      padding: 4px 12px;
+      border: 2px solid var(--black);
+      box-shadow: 2px 2px 0px var(--black);
+      font-weight: 700;
+    }
+
+    /* Main Content Section */
+    .main-section {
+      background-color: var(--bg-gray);
+      padding: 40px 160px 120px;
+      flex: 1;
+    }
+
+    .page-heading {
+      margin-bottom: 40px;
+    }
+
+    .page-heading h2 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .page-heading p {
+      font-size: 18px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .card {
+      border: 2px solid var(--border-color);
+      background: #fff;
+      padding: 40px;
+      margin-bottom: 32px;
+      box-shadow: 8px 8px 0px var(--black);
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 4px solid var(--yellow);
+      display: inline-block;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='date'],
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 16px;
+      border: 3px solid var(--black);
+      outline: none;
+      font-weight: 600;
+      transition: transform 0.1s, box-shadow 0.1s;
+      background: #fff;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      transform: translate(2px, 2px);
+      box-shadow: 4px 4px 0px var(--black);
+      background-color: #fffdec;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .required {
+      color: #e11d48;
+    }
+
+    /* Custom Radio/Checkbox styling */
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .radio-item,
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 3px solid var(--black);
+      background: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+
+    .radio-item:hover,
+    .checkbox-item:hover {
+      background: #f9f9f9;
+    }
+
+    .radio-item:has(input:checked),
+    .checkbox-item:has(input:checked) {
+      background: var(--yellow);
+      box-shadow: 4px 4px 0px var(--black);
+      transform: translate(-1px, -1px);
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--black);
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      border: 3px solid var(--black);
+      box-shadow: 6px 6px 0px var(--black);
+      margin-top: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    table th {
+      background: var(--black);
+      color: #fff;
+      text-align: left;
+      padding: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    table td {
+      padding: 18px;
+      border-bottom: 2px solid var(--black);
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Performance Buttons */
+    .performance-level,
+    .attendance-status {
+      display: flex;
+      gap: 8px;
+    }
+
+    .level-btn,
+    .status-btn {
+      padding: 10px 16px;
+      border: 2px solid var(--black);
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .level-btn:hover,
+    .status-btn:hover {
+      background: var(--bg-gray);
+    }
+
+    .level-btn.selected,
+    .status-btn.selected {
+      box-shadow: 3px 3px 0px var(--black);
+      transform: translate(-2px, -2px);
+    }
+
+    .level-btn.level-1.selected {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #991b1b;
+    }
+
+    .level-btn.level-2.selected {
+      background: #fef9c3;
+      color: #854d0e;
+      border-color: #854d0e;
+    }
+
+    .level-btn.level-3.selected {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #166534;
+    }
+
+    .status-btn.status-present.selected {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #166534;
+    }
+
+    .status-btn.status-absent.selected {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #991b1b;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      display: inline-block;
+      width: 50px;
+      height: 28px;
+      background-color: #ddd;
+      border-radius: 14px;
+      cursor: pointer;
+      position: relative;
+      border: 2px solid var(--black);
+    }
+
+    .toggle-switch input {
+      display: none;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      background-color: #ddd;
+      transition: background-color 0.2s;
+    }
+
+    .toggle-switch input:checked+.toggle-slider {
+      background-color: #4ade80;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: var(--black);
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s;
+    }
+
+    .toggle-switch input:checked+.toggle-slider::before {
+      transform: translateX(22px);
+    }
+
+    /* Error States */
+    .error-message {
+      color: #e11d48;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .field-error input,
+    .field-error select,
+    .field-error textarea {
+      border-color: #e11d48;
+      background: #fff1f2;
+    }
+
+    /* Footer Section */
+    .site-footer {
+      background-color: var(--black);
+      color: #ffffff;
+      padding: 80px 40px 40px 40px;
+      border-top: 4px solid var(--yellow);
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-brand p {
+      color: #ccc;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--yellow);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    .footer-col ul a:hover {
+      color: var(--yellow);
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 60px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #888;
+      font-size: 14px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Submit Button Card */
+    .submit-card {
+      text-align: center;
+      padding: 40px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .btn-submit {
+      background: var(--yellow);
+      color: var(--black);
+      border: 4px solid var(--black);
+      padding: 24px 48px;
+      font-size: 24px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 8px 8px 0px var(--black);
+      transition: all 0.1s;
+      width: 100%;
+      max-width: 600px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      transform: translate(-2px, -2px);
+      box-shadow: 10px 10px 0px var(--black);
+    }
+
+    .btn-submit:active:not(:disabled) {
+      transform: translate(4px, 4px);
+      box-shadow: 4px 4px 0px var(--black);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .color-legend {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .legend-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--black);
+    }
+
+    .legend-box.red {
+      background: #fee2e2;
+    }
+
+    .legend-box.yellow {
+      background: #fef9c3;
+    }
+
+    .legend-box.green {
+      background: #dcfce7;
+    }
+
+    @media (max-width: 1024px) {
       .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 160px;
-        height: 70px;
-        border-bottom: 2px solid var(--border-color);
-        background: #fff;
+        padding: 0 40px;
       }
 
-      .nav-left {
-        display: flex;
-        align-items: center;
-        gap: 40px;
+      .breadcrumb-container,
+      .main-section {
+        padding-left: 40px;
+        padding-right: 40px;
       }
 
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 20px;
-        font-weight: 700;
-        text-decoration: none;
-        color: var(--black);
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: 60px;
+        padding: 0 16px;
       }
 
       .logo-icon {
-        width: 44px;
-        height: 44px;
-        border: none;
-        border-radius: 50%;
-        object-fit: cover;
+        width: 32px;
+        height: 32px;
       }
 
-      .nav-links {
-        display: flex;
-        gap: 24px;
+      .nav-links,
+      .social-icons,
+      .nav-right .social-icons {
+        display: none;
       }
 
-      .nav-links a {
-        text-decoration: none;
-        color: var(--black);
-        font-weight: 600;
-        font-size: 14px;
-      }
-
-      .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        height: 100%;
-      }
-
-      .social-icons {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-      }
-
-      .btn-write {
-        background: var(--black);
-        color: #fff;
-        border: none;
-        padding: 12px 24px;
-        font-weight: 600;
-        border-radius: 4px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-      }
-
-      /* Breadcrumbs */
       .breadcrumb-container {
-        padding: 30px 160px 0;
-        background: var(--bg-gray);
-      }
-      .breadcrumb {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 14px;
-        font-weight: 600;
-        color: #777;
-      }
-      .breadcrumb a {
-        color: var(--black) !important;
-        text-decoration: underline;
-      }
-      .breadcrumb a:hover {
-        text-decoration: none;
-      }
-      .breadcrumb .active {
-        color: var(--black);
-        background: var(--yellow);
-        padding: 4px 12px;
-        border: 2px solid var(--black);
-        box-shadow: 2px 2px 0px var(--black);
-        font-weight: 700;
+        padding: 20px 16px 0;
       }
 
-      /* Main Content Section */
+      .breadcrumb {
+        font-size: 13px;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
       .main-section {
-        background-color: var(--bg-gray);
-        padding: 40px 160px 120px;
-        flex: 1;
+        padding: 20px 16px 80px;
       }
 
       .page-heading {
-        margin-bottom: 40px;
+        margin-bottom: 24px;
       }
+
       .page-heading h2 {
-        font-size: 40px;
-        font-weight: 800;
-        margin-bottom: 8px;
-        line-height: 1.2;
+        font-size: 28px;
       }
+
       .page-heading p {
-        font-size: 18px;
-        color: #555;
-        font-weight: 500;
+        font-size: 16px;
       }
 
       .card {
-        border: 2px solid var(--border-color);
-        background: #fff;
-        padding: 40px;
-        margin-bottom: 32px;
-        box-shadow: 8px 8px 0px var(--black);
+        padding: 20px;
+        margin-bottom: 24px;
+        box-shadow: 4px 4px 0px var(--black);
       }
 
       .section-title {
-        font-size: 24px;
-        font-weight: 800;
-        margin-bottom: 24px;
-        padding-bottom: 8px;
-        border-bottom: 4px solid var(--yellow);
-        display: inline-block;
-      }
-
-      .form-group {
-        margin-bottom: 24px;
+        font-size: 20px;
+        margin-bottom: 20px;
       }
 
       .form-group label {
-        display: block;
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: var(--black);
+        font-size: 15px;
       }
 
       input[type='text'],
@@ -190,375 +668,479 @@
       input[type='date'],
       textarea,
       select {
-        width: 100%;
-        padding: 14px 18px;
-        font-size: 16px;
-        border: 3px solid var(--black);
-        outline: none;
-        font-weight: 600;
-        transition: transform 0.1s, box-shadow 0.1s;
-        background: #fff;
+        padding: 12px 14px;
+        font-size: 15px;
       }
 
-      input:focus,
-      textarea:focus,
-      select:focus {
-        transform: translate(2px, 2px);
-        box-shadow: 4px 4px 0px var(--black);
-        background-color: #fffdec;
-      }
-
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-      }
-
-      .required {
-        color: #e11d48;
-      }
-
-      /* Custom Radio/Checkbox styling */
-      .radio-group, .checkbox-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 12px;
-      }
-
-      .radio-item, .checkbox-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 20px;
-        border: 3px solid var(--black);
-        background: #fff;
-        cursor: pointer;
-        font-weight: 700;
-        transition: transform 0.1s, box-shadow 0.1s;
-      }
-
-      .radio-item:hover, .checkbox-item:hover {
-        background: #f9f9f9;
-      }
-
-      .radio-item:has(input:checked),
-      .checkbox-item:has(input:checked) {
-        background: var(--yellow);
-        box-shadow: 4px 4px 0px var(--black);
-        transform: translate(-1px, -1px);
-      }
-
-      input[type="radio"], input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
-        accent-color: var(--black);
-      }
-
-      /* Tables */
-      .table-container {
-        overflow-x: auto;
-        border: 3px solid var(--black);
-        box-shadow: 6px 6px 0px var(--black);
-        margin-top: 24px;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #fff;
-      }
-
-      table th {
-        background: var(--black);
-        color: #fff;
-        text-align: left;
-        padding: 18px;
-        font-weight: 800;
-        text-transform: uppercase;
+      .radio-item,
+      .checkbox-item {
+        padding: 10px 14px;
         font-size: 14px;
-        letter-spacing: 1px;
       }
 
+      table th,
       table td {
-        padding: 18px;
-        border-bottom: 2px solid var(--black);
-        font-weight: 600;
-        color: var(--black);
+        padding: 12px 8px;
+        font-size: 13px;
       }
 
-      table tr:last-child td {
-        border-bottom: none;
-      }
-
-      /* Performance Buttons */
-      .performance-level, .attendance-status {
-        display: flex;
-        gap: 8px;
-      }
-
-      .level-btn, .status-btn {
-        padding: 10px 16px;
-        border: 2px solid var(--black);
-        background: #fff;
-        font-weight: 800;
-        cursor: pointer;
-        transition: all 0.1s;
-      }
-
-      .level-btn:hover, .status-btn:hover {
-        background: var(--bg-gray);
-      }
-
-      .level-btn.selected, .status-btn.selected {
-        box-shadow: 3px 3px 0px var(--black);
-        transform: translate(-2px, -2px);
-      }
-
-      .level-btn.level-1.selected { background: #fee2e2; color: #991b1b; border-color: #991b1b; }
-      .level-btn.level-2.selected { background: #fef9c3; color: #854d0e; border-color: #854d0e; }
-      .level-btn.level-3.selected { background: #dcfce7; color: #166534; border-color: #166534; }
-
-      .status-btn.status-present.selected { background: #dcfce7; color: #166534; border-color: #166534; }
-      .status-btn.status-absent.selected { background: #fee2e2; color: #991b1b; border-color: #991b1b; }
-
-      /* Toggle Switch */
-      .toggle-switch {
-        display: inline-block;
-        width: 50px;
-        height: 28px;
-        background-color: #ddd;
-        border-radius: 14px;
-        cursor: pointer;
-        position: relative;
-        border: 2px solid var(--black);
-      }
-
-      .toggle-switch input { display: none; }
-
-      .toggle-slider {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 14px;
-        background-color: #ddd;
-        transition: background-color 0.2s;
-      }
-
-      .toggle-switch input:checked + .toggle-slider {
-        background-color: #4ade80;
-      }
-
-      .toggle-slider::before {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: var(--black);
-        top: 2px;
-        left: 2px;
-        transition: transform 0.2s;
-      }
-
-      .toggle-switch input:checked + .toggle-slider::before {
-        transform: translateX(22px);
-      }
-
-      /* Error States */
-      .error-message {
-        color: #e11d48;
-        font-size: 14px;
-        font-weight: 700;
-        margin-top: 8px;
-        display: none;
-      }
-
-      .error-message.show { display: block; }
-      .field-error input, .field-error select, .field-error textarea {
-        border-color: #e11d48;
-        background: #fff1f2;
-      }
-
-      /* Footer */
-      .site-footer {
-        background-color: var(--black);
-        color: #ffffff;
-        padding: 80px 40px 40px 40px;
-        border-top: 4px solid var(--yellow);
-      }
-
-      .footer-container {
-        max-width: 1240px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 40px;
-      }
-
-      .footer-brand h2 {
-        font-size: 24px;
-        font-weight: 800;
-        margin-bottom: 16px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .footer-col h4 {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: var(--yellow);
-      }
-
-      .footer-col ul { list-style: none; }
-      .footer-col ul li { margin-bottom: 12px; }
-      .footer-col ul a { color: #ccc; text-decoration: none; font-weight: 500; transition: color 0.1s; }
-      .footer-col ul a:hover { color: var(--yellow); }
-
-      /* Submit Button Card */
-      .submit-card {
-        text-align: center;
-        padding: 40px;
-        background: transparent;
-        border: none;
-        box-shadow: none;
+      .level-btn,
+      .status-btn {
+        padding: 8px 12px;
+        font-size: 13px;
       }
 
       .btn-submit {
-        background: var(--yellow);
-        color: var(--black);
-        border: 4px solid var(--black);
-        padding: 24px 48px;
-        font-size: 24px;
-        font-weight: 900;
-        cursor: pointer;
-        box-shadow: 8px 8px 0px var(--black);
-        transition: all 0.1s;
-        width: 100%;
-        max-width: 600px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .btn-submit:hover:not(:disabled) {
-        transform: translate(-2px, -2px);
-        box-shadow: 10px 10px 0px var(--black);
-      }
-
-      .btn-submit:active:not(:disabled) {
-        transform: translate(4px, 4px);
+        padding: 18px 24px;
+        font-size: 18px;
         box-shadow: 4px 4px 0px var(--black);
       }
 
-      .btn-submit:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        box-shadow: none;
-        transform: none;
+      .site-footer {
+        padding: 40px 16px 20px 16px;
       }
 
-      .color-legend {
-        display: flex;
-        gap: 24px;
-        margin-bottom: 24px;
-        flex-wrap: wrap;
+      .footer-container {
+        padding: 0;
+        flex-direction: column;
+        gap: 32px;
       }
 
-      .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 700;
-        font-size: 14px;
+      .footer-brand,
+      .footer-links {
+        max-width: 100%;
+        width: 100%;
       }
 
-      .legend-box {
-        width: 24px;
-        height: 24px;
-        border: 2px solid var(--black);
+      .footer-links {
+        gap: 32px;
+        flex-direction: column;
       }
 
-      .legend-box.red { background: #fee2e2; }
-      .legend-box.yellow { background: #fef9c3; }
-      .legend-box.green { background: #dcfce7; }
+      .footer-bottom {
+        margin-top: 40px;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
 
-      @media (max-width: 1024px) {
-        .navbar { padding: 0 40px; }
-        .breadcrumb-container, .main-section { padding-left: 40px; padding-right: 40px; }
-        .grid-2 { grid-template-columns: 1fr; gap: 24px; }
+    @media (max-width: 480px) {
+      .page-heading h2 {
+        font-size: 24px;
       }
 
-      @media (max-width: 768px) {
-        .navbar { height: 60px; padding: 0 16px; }
-        .logo-icon { width: 32px; height: 32px; }
-        .nav-links, .social-icons, .nav-right .social-icons { display: none; }
-        
-        .breadcrumb-container { padding: 20px 16px 0; }
-        .breadcrumb { font-size: 13px; gap: 8px; flex-wrap: wrap; }
-        
-        .main-section { padding: 20px 16px 80px; }
-        
-        .page-heading { margin-bottom: 24px; }
-        .page-heading h2 { font-size: 28px; }
-        .page-heading p { font-size: 16px; }
-
-        .card { padding: 20px; margin-bottom: 24px; box-shadow: 4px 4px 0px var(--black); }
-        .section-title { font-size: 20px; margin-bottom: 20px; }
-
-        .form-group label { font-size: 15px; }
-        input[type='text'], input[type='number'], input[type='date'], textarea, select {
-          padding: 12px 14px;
-          font-size: 15px;
-        }
-
-        .radio-item, .checkbox-item { padding: 10px 14px; font-size: 14px; }
-
-        table th, table td { padding: 12px 8px; font-size: 13px; }
-        .level-btn, .status-btn { padding: 8px 12px; font-size: 13px; }
-
-        .btn-submit {
-          padding: 18px 24px;
-          font-size: 18px;
-          box-shadow: 4px 4px 0px var(--black);
-        }
-
-        .site-footer { padding: 60px 20px 30px; }
-        .footer-container { gap: 30px; }
-        .footer-brand h2 { font-size: 20px; }
-        .footer-col h4 { font-size: 16px; margin-bottom: 15px; }
-        .footer-bottom { margin-top: 40px; flex-direction: column; text-align: center; gap: 10px; }
+      .card {
+        padding: 16px;
       }
 
-      @media (max-width: 480px) {
-        .page-heading h2 { font-size: 24px; }
-        .card { padding: 16px; }
-        .radio-group, .checkbox-group { gap: 10px; }
-        .radio-item, .checkbox-item { width: 100%; }
-        .performance-level, .attendance-status { flex-direction: column; width: 100%; }
-        .level-btn, .status-btn { width: 100%; text-align: center; }
+      .radio-group,
+      .checkbox-group {
+        gap: 10px;
       }
-    </style>
+
+      .radio-item,
+      .checkbox-item {
+        width: 100%;
+      }
+
+      .performance-level,
+      .attendance-status {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .level-btn,
+      .status-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body data-page="class-progress">
-    <!-- HEADER -->
-    <header class="navbar">
-      <div class="nav-left">
-        <a href="index.html" class="logo">
-          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
-          FLN System
-        </a>
-        <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="cluster.html">All Schools</a>
-          <a href="teacher-portal.html">Teachers</a>
-          <a href="help-center.html">Help Center</a>
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+        FLN System
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="cluster.html">All Schools</a>
+        <a href="teacher-portal.html">Teachers</a>
+        <a href="help-center.html">Help Center</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="social-icons">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z">
+          </path>
+        </svg>
+      </div>
+      <a href="cluster.html" class="btn-write">
+        Dashboard
+      </a>
+    </div>
+  </header>
+
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">
+      <div class="breadcrumb-item"><a href="cluster.html">Cluster</a></div>
+      <div class="breadcrumb-separator">></div>
+      <div class="breadcrumb-item"><a href="schools.html">School</a></div>
+      <div class="breadcrumb-separator">></div>
+      <div class="breadcrumb-item active">Class Progress</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-section">
+    <div class="page-heading">
+      <h2>Daily FLN Monitoring</h2>
+      <p>Record comprehensive class data for today's FLN session</p>
+    </div>
+
+    <form id="classProgressForm">
+      <!-- SECTION A: CLASS & TEACHER DETAILS -->
+      <div class="card form-section">
+        <h3 class="section-title">Class & Teacher Details</h3>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="teacher">
+              Teacher Name
+              <span class="required">*</span>
+            </label>
+            <select id="teacher" name="teacher" required>
+              <option value="">-- Select Teacher --</option>
+            </select>
+            <div class="error-message">Please select a teacher</div>
+          </div>
+
+          <div class="form-group">
+            <label for="gradeStart">
+              Class From
+              <span class="required">*</span>
+            </label>
+            <select id="gradeStart" name="gradeStart" required>
+              <option value="">-- Select Class --</option>
+            </select>
+            <div class="error-message">Please select the starting class</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="gradeEnd">
+              Class To
+              <span class="required">*</span>
+            </label>
+            <select id="gradeEnd" name="gradeEnd" required>
+              <option value="">-- Select Class --</option>
+            </select>
+            <div class="error-message">Please select the ending class</div>
+          </div>
+
+          <div class="form-group">
+            <label for="date">
+              Date
+              <span class="required">*</span>
+            </label>
+            <input type="date" id="date" name="date" required />
+            <div class="error-message">Please select a date</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="studentsPresent">
+            Total Students Present
+            <span class="required">*</span>
+          </label>
+          <input type="number" id="studentsPresent" name="studentsPresent" min="0" max="100" required />
+          <div class="error-message">Attendance selection will calculate total present automatically</div>
+        </div>
+
+        <div class="attendance-breakdown" id="attendanceBreakdown">
+          <div style="margin-bottom: 20px;">
+            <h4 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">Attendance Breakdown</h4>
+            <p style="font-size: 14px; color: #555; font-weight: 500;">Calculated automatically from the attendance
+              marks below.</p>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="boysPresent">
+                Boys Present
+                <span class="required">*</span>
+              </label>
+              <input type="number" id="boysPresent" name="boysPresent" min="0" max="100" required />
+              <div class="error-message">Calculated automatically</div>
+            </div>
+
+            <div class="form-group">
+              <label for="girlsPresent">
+                Girls Present
+                <span class="required">*</span>
+              </label>
+              <input type="number" id="girlsPresent" name="girlsPresent" min="0" max="100" required />
+              <div class="error-message">Calculated automatically</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="nav-right">
+
+      <!-- SECTION B: CLASSROOM IMPLEMENTATION TRACKER -->
+      <div class="card form-section">
+        <h3 class="section-title">Classroom Implementation Tracker</h3>
+
+        <div class="form-group">
+          <label>
+            Did FLN Period Happen?
+            <span class="required">*</span>
+          </label>
+          <div class="radio-group" id="flnPeriodContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+          <div class="error-message">Please select yes or no</div>
+        </div>
+
+        <!-- Reason (shown only if FLN No) -->
+        <div id="reasonSection" style="display: none;">
+          <div class="form-group" style="padding: 20px; border: 3px solid var(--black); background: #fff1f2;">
+            <label for="reason">
+              Reason (if No)
+              <span class="required">*</span>
+            </label>
+            <select id="reason" name="reason">
+              <option value="">-- Select Reason --</option>
+            </select>
+            <div class="error-message">Please select a reason</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Duration of FLN Instruction
+            <span class="required">*</span>
+          </label>
+          <div class="radio-group" id="durationContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+          <div class="error-message">Please select a duration</div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Teaching Learning Materials Used
+            <span class="required">*</span>
+          </label>
+          <div class="checkbox-group" id="materialsContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+          <div class="error-message">Please select at least one material</div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Overall Student Engagement
+            <span class="required">*</span>
+          </label>
+          <div class="radio-group" id="engagementContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+          <div class="error-message">Please select an engagement level</div>
+        </div>
+      </div>
+
+      <!-- SECTION C: ACADEMIC FOCUS -->
+      <div class="card form-section">
+        <h3 class="section-title">Academic Focus</h3>
+
+        <div class="form-group">
+          <label>
+            Subjects Covered Today
+            <span class="required">*</span>
+          </label>
+          <div class="checkbox-group" id="subjectsContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+          <div class="error-message">Please select at least one subject</div>
+        </div>
+
+        <div class="form-group">
+          <label for="mainTopic">
+            Main Topic / Theme of the Day
+            <span class="required">*</span>
+          </label>
+          <input type="text" id="mainTopic" name="mainTopic" placeholder="e.g., Fruits and Vegetables, Counting Games"
+            required />
+          <div class="error-message">Please enter the main topic/theme</div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="literacyFocus">
+              Literacy Focus Category
+              <span class="required">*</span>
+            </label>
+            <select id="literacyFocus" name="literacyFocus" required>
+              <option value="">-- Select Category --</option>
+            </select>
+            <div class="error-message">Please select a literacy category</div>
+          </div>
+
+          <div class="form-group">
+            <label for="literacyConcept">
+              Specific Literacy Concept
+              <span class="required">*</span>
+            </label>
+            <input type="text" id="literacyConcept" name="literacyConcept" placeholder="e.g., Letter 'A' sound"
+              required />
+            <div class="error-message">Please enter the literacy concept</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="numeracyFocus">
+              Numeracy Focus Category
+              <span class="required">*</span>
+            </label>
+            <select id="numeracyFocus" name="numeracyFocus" required>
+              <option value="">-- Select Category --</option>
+            </select>
+            <div class="error-message">Please select a numeracy category</div>
+          </div>
+
+          <div class="form-group">
+            <label for="numeracyConcept">
+              Specific Numeracy Concept
+              <span class="required">*</span>
+            </label>
+            <input type="text" id="numeracyConcept" name="numeracyConcept" placeholder="e.g., Counting 1-10" required />
+            <div class="error-message">Please enter the numeracy concept</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION D: FULL CLASS STUDENT PERFORMANCE -->
+      <div class="card form-section">
+        <h3 class="section-title">Full Class Student Performance</h3>
+
+        <p style="margin-bottom: 24px; font-weight: 600; color: #555;">
+          Mark today's performance level for all students.
+        </p>
+
+        <div class="color-legend">
+          <div class="legend-item">
+            <div class="legend-box red"></div>
+            <span>1 = Not Yet Able</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box yellow"></div>
+            <span>2 = With Help</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box green"></div>
+            <span>3 = Independently</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="studentTable">
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>Performance Level</th>
+                <th>Needs Support</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION E: STUDENT ATTENDANCE STATUS -->
+      <div class="card form-section">
+        <h3 class="section-title">Student Attendance Status</h3>
+
+        <p style="margin-bottom: 24px; font-weight: 600; color: #555;">
+          Mark each child as present or absent for today.
+        </p>
+
+        <div class="color-legend">
+          <div class="legend-item">
+            <div class="legend-box green" style="background: #e1fdec;"></div>
+            <span>Present</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box red" style="background: #fff1f2;"></div>
+            <span>Absent</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="studentAttendanceTable">
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>Attendance Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION F: GENERAL OBSERVATION -->
+      <div class="card form-section">
+        <h3 class="section-title">General Observation</h3>
+
+        <div class="form-group">
+          <label for="remarks">
+            Remarks / Notes
+          </label>
+          <textarea id="remarks" name="remarks"
+            placeholder="Enter any additional observations about today's class..."></textarea>
+        </div>
+      </div>
+
+      <!-- SUBMIT BUTTON -->
+      <div class="submit-card" id="submitCard">
+        <button type="submit" id="submitBtn" class="btn-submit" disabled>Submit Report</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>
+          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
+          FLN System
+        </h2>
+        <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
         <div class="social-icons">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -572,382 +1154,43 @@
               d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z">
             </path>
           </svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+            </path>
+          </svg>
         </div>
-        <a href="cluster.html" class="btn-write">
-          Dashboard
-        </a>
       </div>
-    </header>
 
-    <div class="breadcrumb-container">
-      <div class="breadcrumb">
-        <div class="breadcrumb-item"><a href="cluster.html">Cluster</a></div>
-        <div class="breadcrumb-separator">></div>
-        <div class="breadcrumb-item"><a href="schools.html">School</a></div>
-        <div class="breadcrumb-separator">></div>
-        <div class="breadcrumb-item active">Class Progress</div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cluster.html">School Cluster</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="teacher-portal.html">Teacher Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="help-center.html">Help Center</a></li>
+            <li><a href="#">Training</a></li>
+            <li><a href="#">Contact Support</a></li>
+          </ul>
+        </div>
       </div>
     </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Space ECE India Foundation. All rights reserved.</div>
+      <div>Designed and Developed by <a href="https://codewithdhruba.in/" target="_blank">Dhrubaraj Pati</a></div>
+    </div>
+  </footer>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-section">
-      <div class="page-heading">
-        <h2>Daily FLN Monitoring</h2>
-        <p>Record comprehensive class data for today's FLN session</p>
-      </div>
-
-      <form id="classProgressForm">
-        <!-- SECTION A: CLASS & TEACHER DETAILS -->
-        <div class="card form-section">
-          <h3 class="section-title">Class & Teacher Details</h3>
-
-          <div class="grid-2">
-            <div class="form-group">
-              <label for="teacher">
-                Teacher Name
-                <span class="required">*</span>
-              </label>
-              <select id="teacher" name="teacher" required>
-                <option value="">-- Select Teacher --</option>
-              </select>
-              <div class="error-message">Please select a teacher</div>
-            </div>
-
-            <div class="form-group">
-              <label for="gradeStart">
-                Class From
-                <span class="required">*</span>
-              </label>
-              <select id="gradeStart" name="gradeStart" required>
-                <option value="">-- Select Class --</option>
-              </select>
-              <div class="error-message">Please select the starting class</div>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="form-group">
-              <label for="gradeEnd">
-                Class To
-                <span class="required">*</span>
-              </label>
-              <select id="gradeEnd" name="gradeEnd" required>
-                <option value="">-- Select Class --</option>
-              </select>
-              <div class="error-message">Please select the ending class</div>
-            </div>
-
-            <div class="form-group">
-              <label for="date">
-                Date
-                <span class="required">*</span>
-              </label>
-              <input type="date" id="date" name="date" required />
-              <div class="error-message">Please select a date</div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="studentsPresent">
-              Total Students Present
-              <span class="required">*</span>
-            </label>
-            <input type="number" id="studentsPresent" name="studentsPresent" min="0" max="100" required />
-            <div class="error-message">Attendance selection will calculate total present automatically</div>
-          </div>
-
-          <div class="attendance-breakdown" id="attendanceBreakdown">
-            <div style="margin-bottom: 20px;">
-              <h4 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">Attendance Breakdown</h4>
-              <p style="font-size: 14px; color: #555; font-weight: 500;">Calculated automatically from the attendance marks below.</p>
-            </div>
-
-            <div class="grid-2">
-              <div class="form-group">
-                <label for="boysPresent">
-                  Boys Present
-                  <span class="required">*</span>
-                </label>
-                <input type="number" id="boysPresent" name="boysPresent" min="0" max="100" required />
-                <div class="error-message">Calculated automatically</div>
-              </div>
-
-              <div class="form-group">
-                <label for="girlsPresent">
-                  Girls Present
-                  <span class="required">*</span>
-                </label>
-                <input type="number" id="girlsPresent" name="girlsPresent" min="0" max="100" required />
-                <div class="error-message">Calculated automatically</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION B: CLASSROOM IMPLEMENTATION TRACKER -->
-        <div class="card form-section">
-          <h3 class="section-title">Classroom Implementation Tracker</h3>
-
-          <div class="form-group">
-            <label>
-              Did FLN Period Happen?
-              <span class="required">*</span>
-            </label>
-            <div class="radio-group" id="flnPeriodContainer">
-              <!-- Populated by JavaScript -->
-            </div>
-            <div class="error-message">Please select yes or no</div>
-          </div>
-
-          <!-- Reason (shown only if FLN No) -->
-          <div id="reasonSection" style="display: none;">
-            <div class="form-group" style="padding: 20px; border: 3px solid var(--black); background: #fff1f2;">
-              <label for="reason">
-                Reason (if No)
-                <span class="required">*</span>
-              </label>
-              <select id="reason" name="reason">
-                <option value="">-- Select Reason --</option>
-              </select>
-              <div class="error-message">Please select a reason</div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>
-              Duration of FLN Instruction
-              <span class="required">*</span>
-            </label>
-            <div class="radio-group" id="durationContainer">
-              <!-- Populated by JavaScript -->
-            </div>
-            <div class="error-message">Please select a duration</div>
-          </div>
-
-          <div class="form-group">
-            <label>
-              Teaching Learning Materials Used
-              <span class="required">*</span>
-            </label>
-            <div class="checkbox-group" id="materialsContainer">
-              <!-- Populated by JavaScript -->
-            </div>
-            <div class="error-message">Please select at least one material</div>
-          </div>
-
-          <div class="form-group">
-            <label>
-              Overall Student Engagement
-              <span class="required">*</span>
-            </label>
-            <div class="radio-group" id="engagementContainer">
-              <!-- Populated by JavaScript -->
-            </div>
-            <div class="error-message">Please select an engagement level</div>
-          </div>
-        </div>
-
-        <!-- SECTION C: ACADEMIC FOCUS -->
-        <div class="card form-section">
-          <h3 class="section-title">Academic Focus</h3>
-
-          <div class="form-group">
-            <label>
-              Subjects Covered Today
-              <span class="required">*</span>
-            </label>
-            <div class="checkbox-group" id="subjectsContainer">
-              <!-- Populated by JavaScript -->
-            </div>
-            <div class="error-message">Please select at least one subject</div>
-          </div>
-
-          <div class="form-group">
-            <label for="mainTopic">
-              Main Topic / Theme of the Day
-              <span class="required">*</span>
-            </label>
-            <input type="text" id="mainTopic" name="mainTopic" placeholder="e.g., Fruits and Vegetables, Counting Games" required />
-            <div class="error-message">Please enter the main topic/theme</div>
-          </div>
-
-          <div class="grid-2">
-            <div class="form-group">
-              <label for="literacyFocus">
-                Literacy Focus Category
-                <span class="required">*</span>
-              </label>
-              <select id="literacyFocus" name="literacyFocus" required>
-                <option value="">-- Select Category --</option>
-              </select>
-              <div class="error-message">Please select a literacy category</div>
-            </div>
-
-            <div class="form-group">
-              <label for="literacyConcept">
-                Specific Literacy Concept
-                <span class="required">*</span>
-              </label>
-              <input type="text" id="literacyConcept" name="literacyConcept" placeholder="e.g., Letter 'A' sound" required />
-              <div class="error-message">Please enter the literacy concept</div>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="form-group">
-              <label for="numeracyFocus">
-                Numeracy Focus Category
-                <span class="required">*</span>
-              </label>
-              <select id="numeracyFocus" name="numeracyFocus" required>
-                <option value="">-- Select Category --</option>
-              </select>
-              <div class="error-message">Please select a numeracy category</div>
-            </div>
-
-            <div class="form-group">
-              <label for="numeracyConcept">
-                Specific Numeracy Concept
-                <span class="required">*</span>
-              </label>
-              <input type="text" id="numeracyConcept" name="numeracyConcept" placeholder="e.g., Counting 1-10" required />
-              <div class="error-message">Please enter the numeracy concept</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION D: FULL CLASS STUDENT PERFORMANCE -->
-        <div class="card form-section">
-          <h3 class="section-title">Full Class Student Performance</h3>
-
-          <p style="margin-bottom: 24px; font-weight: 600; color: #555;">
-            Mark today's performance level for all students.
-          </p>
-
-          <div class="color-legend">
-            <div class="legend-item">
-              <div class="legend-box red"></div>
-              <span>1 = Not Yet Able</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-box yellow"></div>
-              <span>2 = With Help</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-box green"></div>
-              <span>3 = Independently</span>
-            </div>
-          </div>
-
-          <div class="table-container">
-            <table id="studentTable">
-              <thead>
-                <tr>
-                  <th>Student Name</th>
-                  <th>Gender</th>
-                  <th>Class</th>
-                  <th>Performance Level</th>
-                  <th>Needs Support</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Populated by JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- SECTION E: STUDENT ATTENDANCE STATUS -->
-        <div class="card form-section">
-          <h3 class="section-title">Student Attendance Status</h3>
-
-          <p style="margin-bottom: 24px; font-weight: 600; color: #555;">
-            Mark each child as present or absent for today.
-          </p>
-
-          <div class="color-legend">
-            <div class="legend-item">
-              <div class="legend-box green" style="background: #e1fdec;"></div>
-              <span>Present</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-box red" style="background: #fff1f2;"></div>
-              <span>Absent</span>
-            </div>
-          </div>
-
-          <div class="table-container">
-            <table id="studentAttendanceTable">
-              <thead>
-                <tr>
-                  <th>Student Name</th>
-                  <th>Gender</th>
-                  <th>Class</th>
-                  <th>Attendance Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Populated by JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- SECTION F: GENERAL OBSERVATION -->
-        <div class="card form-section">
-          <h3 class="section-title">General Observation</h3>
-
-          <div class="form-group">
-            <label for="remarks">
-              Remarks / Notes
-            </label>
-            <textarea id="remarks" name="remarks" placeholder="Enter any additional observations about today's class..."></textarea>
-          </div>
-        </div>
-
-        <!-- SUBMIT BUTTON -->
-        <div class="submit-card" id="submitCard">
-          <button type="submit" id="submitBtn" class="btn-submit" disabled>Submit Report</button>
-        </div>
-      </form>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="footer-container">
-        <div class="footer-brand">
-          <h2>
-            <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
-            FLN System
-          </h2>
-          <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
-        </div>
-
-        <div class="footer-links">
-          <div class="footer-col">
-            <h4>Platform</h4>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="cluster.html">School Cluster</a></li>
-              <li><a href="teacher-portal.html">Teacher Portal</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="help-center.html">Help Center</a></li>
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Support</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom" style="max-width: 1240px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid #333; display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 14px;">
-        <div>&copy; 2026 Space ECE India Foundation. All rights reserved.</div>
-        <div>Designed for FLN Initiative</div>
-      </div>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

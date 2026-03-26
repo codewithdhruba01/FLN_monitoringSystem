@@ -354,10 +354,6 @@
             gap: 12px;
         }
 
-        .footer-brand h2 .logo-icon {
-            border: none;
-        }
-
         .footer-brand p {
             color: #ccc;
             line-height: 1.5;
@@ -408,6 +404,11 @@
             font-size: 14px;
             flex-wrap: wrap;
             gap: 16px;
+        }
+
+        .footer-bottom a {
+            color: #fff;
+            text-decoration: none;
         }
 
         /* =========================================
@@ -562,20 +563,32 @@
                 font-size: 20px;
             }
 
-            .footer-brand {
-                max-width: 100%;
+            .site-footer {
+                padding: 40px 16px 20px 16px;
             }
 
-            .footer-links {
+            .footer-container {
+                padding: 0;
                 flex-direction: column;
-                width: 100%;
                 gap: 32px;
             }
 
-            .footer-bottom {
+            .footer-brand,
+            .footer-links {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .footer-links {
+                gap: 32px;
                 flex-direction: column;
-                text-align: center;
-                gap: 12px;
+            }
+
+            .footer-bottom {
+                margin-top: 40px;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
             }
         }
     </style>
@@ -800,7 +813,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h2>
-                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
                     FLN System
                 </h2>
                 <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
@@ -849,7 +862,8 @@
         </div>
         <div class="footer-bottom">
             <div>&copy; 2026 Space ECE India Foundation. All rights reserved.</div>
-            <div>Designed for FLN Initiative</div>
+            <div>Designed and Developed by <a href="https://codewithdhruba.in/" target="_blank">Dhrubaraj Pati</a>
+            </div>
         </div>
     </footer>
 
