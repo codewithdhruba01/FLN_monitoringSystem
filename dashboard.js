@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clusterSelect.addEventListener('change', () => {
         const cluster = clusterSelect.value;
         schoolSelect.innerHTML = '<option value="">-- Select School --</option>';
-        
+
         if (cluster && workbookSchoolDirectory[cluster]) {
             schoolSelect.innerHTML += '<option value="All">All Schools</option>';
             workbookSchoolDirectory[cluster].forEach(school => {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle Export PDF
     filterForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const cluster = clusterSelect.value;
         const school = schoolSelect.value;
         const className = document.getElementById('classSelect').value;
@@ -63,7 +63,169 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generatePDF(cluster, school, className, fromDate, toDate);
     });
+
+    // Initialize Charts
+    initCharts();
 });
+
+/**
+ * Initializes Dashboard Charts with Dummy Data
+ */
+function initCharts() {
+    // Custom Chart.js defaults for Neubrutalism style
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#222222';
+    Chart.defaults.font.weight = '600';
+
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 20,
+                    usePointStyle: true,
+                    font: {
+                        size: 12,
+                        weight: '700'
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: '#222222',
+                titleFont: { size: 14, weight: '800' },
+                bodyFont: { size: 13, weight: '600' },
+                padding: 12,
+                cornerRadius: 0,
+                displayColors: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: '#e0e0e0',
+                    borderWidth: 2,
+                    borderColor: '#222222'
+                },
+                ticks: {
+                    font: { weight: '700' }
+                }
+            },
+            x: {
+                grid: { display: false },
+                ticks: {
+                    font: { weight: '700' }
+                }
+            }
+        }
+    };
+
+    // 1. Attendance Trends Chart
+    const ctxAttendance = document.getElementById('attendanceChart').getContext('2d');
+    new Chart(ctxAttendance, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            datasets: [{
+                label: 'Attendance %',
+                data: [82, 85, 78, 92, 88, 80],
+                borderColor: '#222222',
+                backgroundColor: '#fcb900',
+                borderWidth: 4,
+                tension: 0, // Hard angles for brutalist look
+                fill: true,
+                pointBackgroundColor: '#ffffff',
+                pointBorderColor: '#222222',
+                pointBorderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }]
+        },
+        options: chartOptions
+    });
+
+    // 2. Overall Progress Chart
+    const ctxProgress = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctxProgress, {
+        type: 'doughnut',
+        data: {
+            labels: ['Level 1 (Basic)', 'Level 2 (Emerging)', 'Level 3 (Proficient)'],
+            datasets: [{
+                data: [25, 45, 30],
+                backgroundColor: ['#ff4d4d', '#fcb900', '#4ade80'],
+                borderWidth: 3,
+                borderColor: '#222222',
+                hoverOffset: 15
+            }]
+        },
+        options: {
+            ...chartOptions,
+            cutout: '60%',
+            scales: { display: false } // No scales for doughnut
+        }
+    });
+
+    // 3. Cluster Comparison
+    const ctxCluster = document.getElementById('clusterChart').getContext('2d');
+    new Chart(ctxCluster, {
+        type: 'bar',
+        data: {
+            labels: ['Halol', 'Maval'],
+            datasets: [{
+                label: 'Avg Completion',
+                data: [75, 68],
+                backgroundColor: ['#fcb900', '#222222'],
+                borderWidth: 3,
+                borderColor: '#222222'
+            }]
+        },
+        options: {
+            ...chartOptions,
+            indexAxis: 'y' // Horizontal bar
+        }
+    });
+
+    // 4. Subject-wise Student Level
+    const ctxSubject = document.getElementById('subjectChart').getContext('2d');
+    new Chart(ctxSubject, {
+        type: 'bar',
+        data: {
+            labels: ['Language', 'English', 'Math', 'EVS', 'Science', 'Art'],
+            datasets: [
+                {
+                    label: 'Level 1',
+                    data: [10, 15, 20, 12, 18, 5],
+                    backgroundColor: '#ff4d4d',
+                    borderWidth: 2,
+                    borderColor: '#222222'
+                },
+                {
+                    label: 'Level 2',
+                    data: [50, 45, 40, 48, 42, 35],
+                    backgroundColor: '#fcb900',
+                    borderWidth: 2,
+                    borderColor: '#222222'
+                },
+                {
+                    label: 'Level 3',
+                    data: [40, 40, 40, 40, 40, 60],
+                    backgroundColor: '#4ade80',
+                    borderWidth: 2,
+                    borderColor: '#222222'
+                }
+            ]
+        },
+        options: {
+            ...chartOptions,
+            scales: {
+                y: { stacked: true },
+                x: { stacked: true }
+            }
+        }
+    });
+}
 
 /**
  * Generates a PDF Report using jsPDF
@@ -90,7 +252,7 @@ function generatePDF(cluster, school, className, fromDate, toDate) {
     // Filter Details
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
-    
+
     let y = 60;
     const labelX = 20;
     const valueX = 70;
@@ -105,7 +267,7 @@ function generatePDF(cluster, school, className, fromDate, toDate) {
 
     doc.setLineWidth(0.5);
     doc.rect(15, 50, 180, 75); // Border box for filters
-    
+
     y = 65;
     addField("Cluster", cluster);
     addField("School", school);
