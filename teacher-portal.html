@@ -605,6 +605,7 @@
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="cluster.html">All Schools</a>
+                <a href="dashboard.html">Dashboard</a>
                 <a href="teacher-portal.html" style="color: var(--yellow);">Teacher Portal</a>
                 <a href="help-center.html">Help Center</a>
             </div>
@@ -651,17 +652,29 @@
                 <div class="login-form">
                     <h2>Sign In</h2>
                     <div class="input-group">
-                        <label for="email">Teacher Email / ID</label>
-                        <input type="text" id="email" placeholder="Enter your email or ID">
+                        <label for="email">Admin ID</label>
+                        <input type="text" id="email" placeholder="Enter Admin ID">
                     </div>
                     <div class="input-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password">
+                        <input type="password" id="password" placeholder="Enter Password">
                     </div>
-                    <button class="btn-login"
-                        onclick="event.preventDefault(); alert('Login Functionality Setup Pending');">Access
-                        Dashboard</button>
+                    <button class="btn-login" id="loginBtn">Access Dashboard</button>
                 </div>
+
+                <script>
+                    document.getElementById('loginBtn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const adminId = document.getElementById('email').value;
+                        const password = document.getElementById('password').value;
+
+                        if (adminId === 'admin' && password === 'admin') {
+                            window.location.href = 'dashboard.html';
+                        } else {
+                            alert('Invalid Admin ID or Password. Please try again.');
+                        }
+                    });
+                </script>
             </div>
         </section>
 
