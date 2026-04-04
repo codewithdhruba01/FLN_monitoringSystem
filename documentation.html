@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | FLN Monitoring System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow: #fcb900;
+            --black: #222222;
+            --dark-gray: #303030;
+            --bg-gray: #f2efe9;
+            --border-color: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--black);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 160px;
+            height: 70px;
+            border-bottom: 2px solid var(--border-color);
+            background: #fff;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-write {
+            background: var(--black);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Documentation Hero */
+        .doc-header {
+            background-color: var(--bg-gray);
+            padding: 100px 40px;
+            border-bottom: 3px solid var(--black);
+            text-align: center;
+        }
+
+        .doc-header h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            background-color: var(--yellow);
+            padding: 0 10px;
+            display: inline-block;
+        }
+
+        .doc-intro {
+            font-size: 20px;
+            font-weight: 600;
+            max-width: 800px;
+            color: #444;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 60px;
+        }
+
+        /* Sticky Sidebar Nav */
+        .sidebar-nav {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-nav h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: #888;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav ul li {
+            margin-bottom: 12px;
+        }
+
+        .sidebar-nav ul a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 700;
+            font-size: 15px;
+            padding: 8px 12px;
+            display: block;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sidebar-nav ul a:hover {
+            background: var(--bg-gray);
+            border-left: 3px solid var(--yellow);
+        }
+
+        /* Content Sections */
+        .doc-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            border-bottom: 4px solid var(--yellow);
+            display: inline-block;
+        }
+
+        .doc-section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+        }
+
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .purpose-card {
+            border: 3px solid var(--black);
+            padding: 24px;
+            background: #fff;
+            box-shadow: 6px 6px 0px var(--black);
+        }
+
+        .purpose-card h4 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .purpose-card p {
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding: 32px;
+            background: #fff;
+            border: 3px solid var(--black);
+            box-shadow: 8px 8px 0px var(--yellow);
+        }
+
+        .step-num {
+            min-width: 50px;
+            height: 50px;
+            background: var(--black);
+            color: var(--yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            border-radius: 50%;
+        }
+
+        .step-content h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .module-info {
+            background: var(--bg-gray);
+            border-left: 6px solid var(--black);
+            padding: 32px;
+            margin-top: 32px;
+        }
+
+        .module-info h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .info-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-list li {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list li::before {
+            content: "→";
+            color: var(--yellow);
+            font-weight: 800;
+        }
+
+        .table-container {
+            margin-top: 32px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 3px solid var(--black);
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border: 2px solid var(--black);
+        }
+
+        th {
+            background: var(--yellow);
+            font-weight: 800;
+        }
+
+        td {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--black);
+            color: #ffffff;
+            padding: 80px 40px 40px 40px;
+            border-top: 4px solid var(--yellow);
+        }
+
+        .footer-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-brand p {
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 60px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #888;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 0 40px;
+            }
+
+            .doc-header {
+                padding: 60px 40px;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-nav {
+                display: none;
+            }
+
+            .purpose-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+                <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+                FLN System
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="cluster.html">All Schools</a>
+                <a href="teacher-portal.html">Teacher Portal</a>
+                <a href="help-center.html">Help Center</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="btn-write" onclick="window.location.href='cluster.html'">
+                Get Started
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="doc-header">
+            <div class="doc-container">
+                <h1>System <span class="highlight">Documentation</span></h1>
+                <p class="doc-intro">Comprehensive guide to the FLN Daily Monitoring System covering project objectives,
+                    navigation flow, and core module functionalities.</p>
+            </div>
+        </section>
+
+        <div class="main-container">
+            <aside class="sidebar-nav">
+                <h3>Contents</h3>
+                <ul>
+                    <li><a href="#overview">Project Overview</a></li>
+                    <li><a href="#system-flow">System Flow</a></li>
+                    <li><a href="#module-1">Module 1 - Classes Held</a></li>
+                    <li><a href="#module-2">Module 2 - Student Tracking</a></li>
+                    <li><a href="#module-3">Module 3 - Teacher Monitoring</a></li>
+                    <li><a href="#analytics">Data & Analytics</a></li>
+                </ul>
+            </aside>
+
+            <div class="doc-content">
+                <!-- Overview Section -->
+                <section id="overview" class="doc-section">
+                    <h2>Project Overview</h2>
+                    <p style="font-weight: 600; margin-bottom: 24px;">The <strong>Daily Monitoring System for the FLN
+                            Program (Foundational Literacy and Numeracy)</strong> tracks classroom activities and
+                        student learning across all schools under the Halol and Maval clusters.</p>
+
+                    <div class="purpose-header">
+                        <h3 style="font-weight: 800; font-size: 24px; margin-bottom: 16px;">Purpose of the System</h3>
+                    </div>
+
+                    <div class="purpose-grid">
+                        <div class="purpose-card">
+                            <h4>Subject Tracking</h4>
+                            <p>Monitor daily lessons, subjects, topics, and subtopics taught in each classroom.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <h4>Student Performance</h4>
+                            <p>Record attendance and learning indicators to identify students needing additional
+                                support.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <h4>Teacher Implementation</h4>
+                            <p>Track the use of TLM (Teaching Learning Materials) and FLN activity implementation.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <h4>Long-term Analytics</h4>
+                            <p>Enable data-driven insights through weekly, monthly, and quarterly progress tracking.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Flow Section -->
+                <section id="system-flow" class="doc-section">
+                    <h2>System Flow</h2>
+                    <p style="font-weight: 600; margin-bottom: 32px;">The application follows a structured three-step
+                        navigation process ensuring accurate data context.</p>
+
+                    <div class="flow-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h3>Cluster Selection</h3>
+                            <p style="font-weight: 500;">Users start by selecting their operational cluster (Halol or
+                                Maval). This filters the list of available schools.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h3>School Selection</h3>
+                            <p style="font-weight: 500;">Users select their specific school from the dynamically
+                                filtered list based on the chosen cluster.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h3>Teacher Dashboard</h3>
+                            <p style="font-weight: 500;">Teachers access their unique dashboard consisting of three core
+                                modules: Classes Held, Student Attendance, and Performance Monitoring.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 1 Section -->
+                <section id="module-1" class="doc-section">
+                    <h2>Module 1 – Classes Held</h2>
+                    <p style="font-weight: 600;">Records daily activities across three main class types: FLN Classes,
+                        Remedial Classes, and Library Sessions.</p>
+
+                    <div class="module-info">
+                        <h3>FLN Class Details</h3>
+                        <ul class="info-list">
+                            <li>Literacy Focus: Awareness, Reading, Writing</li>
+                            <li>Numeracy Focus: Concepts, Operations, Shapes</li>
+                            <li>Duration: 30 / 45 / 60 minute intervals</li>
+                            <li>TLM Usage: Flashcards, Activity Kits, etc.</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-info"
+                        style="background: white; border: 3px solid var(--black); box-shadow: 6px 6px 0px var(--black);">
+                        <h3>Remedial & Library Sessions</h3>
+                        <p style="font-weight: 500; margin-bottom: 16px;">Focused sessions for storytelling, reading
+                            practice, and remedial support for core subjects like Mathematics and English.</p>
+                        <ul class="info-list">
+                            <li>Learning Check: Retrieval & retell capability</li>
+                            <li>Feedback: Overall student engagement level</li>
+                            <li>Reflection: Teacher's daily class experience</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Module 2 Section -->
+                <section id="module-2" class="doc-section">
+                    <h2>Module 2 – Student Tracking</h2>
+                    <p style="font-weight: 600;">Automatic loading of student lists for the selected school and class to
+                        record attendance and performance.</p>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Indicators</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Attendance</td>
+                                    <td>Present / Absent</td>
+                                </tr>
+                                <tr>
+                                    <td>Performance Rating</td>
+                                    <td>Rating Scale 1 to 5</td>
+                                </tr>
+                                <tr>
+                                    <td>Learning Indicator</td>
+                                    <td>Not Yet / With Help / Independently</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="module-info" style="margin-top: 32px; background: var(--yellow);">
+                        <h3 style="margin-bottom: 10px;">Focus Student Tracking</h3>
+                        <p style="font-weight: 700; color: var(--black);">Teachers select 5 students per day (rotating
+                            weekly) for deeper learning analysis and individual progression monitoring.</p>
+                    </div>
+                </section>
+
+                <!-- Module 3 Section -->
+                <section id="module-3" class="doc-section">
+                    <h2>Module 3 – Teacher Monitoring</h2>
+                    <p style="font-weight: 600;">Capturing teacher-level implementation indicators and professional
+                        reflection.</p>
+                    <ul class="info-list" style="margin-top: 24px;">
+                        <li>Average time spent on FLN instruction</li>
+                        <li>TLM utilization and effectiveness</li>
+                        <li>Coverage of Literacy Categories</li>
+                        <li>Coverage of Numeracy Categories</li>
+                        <li>Level of student participation (Low/High)</li>
+                        <li>Teacher reflection notes</li>
+                    </ul>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics" class="doc-section">
+                    <h2>Data Usage & Analytics</h2>
+                    <p style="font-weight: 600; margin-bottom: 24px;">The collected data is stored in a central master
+                        database for high-level visual monitoring and decision-making.</p>
+
+                    <div class="purpose-grid">
+                        <div class="purpose-card"
+                            style="border-color: var(--yellow); background: var(--black); color: white;">
+                            <h4 style="color: var(--yellow);">Trend Analysis</h4>
+                            <p style="color: #ccc;">Identification of attendance trends and school/cluster level
+                                comparisons.</p>
+                        </div>
+                        <div class="purpose-card"
+                            style="border-color: var(--yellow); background: var(--black); color: white;">
+                            <h4 style="color: var(--yellow);">Progress Reports</h4>
+                            <p style="color: #ccc;">Generation of quarterly learning progress reports for stakeholders.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>
+                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
+                    FLN System
+                </h2>
+                <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
+                <div class="social-icons">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7v-3h3V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-1.1 0-2 .9-2 2v1h4l-1 3h-3v6.78c5.05-.5 9-4.76 9-9.78z">
+                        </path>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cluster.html">School Cluster</a></li>
+                        <li><a href="#">Analytics</a></li>
+                        <li><a href="teacher-portal.html">Teacher Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="training-schedule.html">Training</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Space ECE India Foundation. All rights reserved.</div>
+            <div>Designed and Developed by <a href="https://codewithdhruba.in/" target="_blank">Dhrubaraj Pati</a></div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
