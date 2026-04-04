@@ -1,5 +1,6 @@
 # FLN Daily Monitoring System
-## Space ECE India Foundation
+
+![FLN Monitoring Cover](assets/FLN%20Monitoring.png)
 
 A responsive multi-page web application for recording foundational literacy and numeracy (FLN) monitoring data.
 
