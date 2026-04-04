@@ -450,6 +450,113 @@
                 font-size: 32px;
             }
         }
+
+        /* Registration Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-container {
+            background: #ffffff;
+            border: 4px solid var(--black);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 12px 12px 0px var(--black);
+            position: relative;
+            animation: modalSlide 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--yellow);
+            border: 3px solid var(--black);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 800;
+            box-shadow: 3px 3px 0px var(--black);
+        }
+
+        .modal-close:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--black);
+        }
+
+        .modal-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-form label {
+            display: block;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .modal-form input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 3px solid var(--black);
+            font-size: 16px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .modal-form input:focus {
+            background-color: var(--bg-gray);
+        }
+
+        .btn-submit-reg {
+            width: 100%;
+            background: var(--yellow);
+            color: var(--black);
+            border: 3px solid var(--black);
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--black);
+            transition: all 0.1s;
+            margin-top: 10px;
+        }
+
+        .btn-submit-reg:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--black);
+        }
     </style>
 </head>
 
@@ -529,7 +636,7 @@
                                 <p class="training-desc">Comprehensive workshop on implementing phonics-based reading
                                     strategies in grade 1-3 classrooms. Learn how to track progress using the new FLN
                                     indicators.</p>
-                                <a href="#" class="btn-register">Register Now</a>
+                                <a href="javascript:void(0)" class="btn-register" onclick="openRegistrationModal('Foundational Literacy Workshop')">Register Now</a>
                             </div>
                         </div>
 
@@ -563,7 +670,7 @@
                                 </div>
                                 <p class="training-desc">Hands-on training session focusing on activity-based learning
                                     for basic arithmetic operations. Physical kits will be provided to participants.</p>
-                                <a href="#" class="btn-register">Register Now</a>
+                                <a href="javascript:void(0)" class="btn-register" onclick="openRegistrationModal('Numeracy Training for Primary Teachers')">Register Now</a>
                             </div>
                         </div>
 
@@ -598,7 +705,7 @@
                                 <p class="training-desc">Orientation for the new digital reporting features in the
                                     Teacher Portal. Learn how to use data visualization to support struggling students.
                                 </p>
-                                <a href="#" class="btn-register">Register Now</a>
+                                <a href="javascript:void(0)" class="btn-register" onclick="openRegistrationModal('Digital Tools for FLN Monitoring')">Register Now</a>
                             </div>
                         </div>
                     </div>
@@ -734,6 +841,73 @@
             </div>
         </div>
     </footer>
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay" id="registrationModal">
+        <div class="modal-container">
+            <div class="modal-close" onclick="closeRegistrationModal()">X</div>
+            <div class="modal-header">
+                <h2>Register Training</h2>
+                <p id="selectedSessionDisplay">Session: Foundational Literacy Workshop</p>
+            </div>
+            <form class="modal-form" id="registerForm">
+                <input type="hidden" id="sessionNameInput" name="session_name">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regTeacherID">Teacher ID / Admin ID</label>
+                    <input type="text" id="regTeacherID" placeholder="Enter your ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="regSchool">School Name</label>
+                    <input type="text" id="regSchool" placeholder="Enter your school name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Mobile Number</label>
+                    <input type="tel" id="regPhone" placeholder="Enter mobile number" required>
+                </div>
+                <button type="submit" class="btn-submit-reg">Confirm Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('registrationModal');
+        const sessionDisplayText = document.getElementById('selectedSessionDisplay');
+        const sessionHiddenInput = document.getElementById('sessionNameInput');
+
+        function openRegistrationModal(sessionName) {
+            sessionDisplayText.innerText = "Session: " + sessionName;
+            sessionHiddenInput.value = sessionName;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeRegistrationModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scroll
+        }
+
+        // Close when clicking outside the modal container
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeRegistrationModal();
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const session = sessionHiddenInput.value;
+            const name = document.getElementById('regName').value;
+            
+            alert(`Thank you, ${name}! You have successfully registered for the "${session}" session. A confirmation has been sent to your registered mobile number.`);
+            
+            closeRegistrationModal();
+            this.reset();
+        });
+    </script>
 
 </body>
 
