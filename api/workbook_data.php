@@ -4,6 +4,20 @@ declare(strict_types=1);
 
 const WORKBOOK_DATA_PATH = __DIR__ . '/../Students List Maval, Halol.xlsx';
 
+function normalizeWorkbookClassName(string $value): string
+{
+    $value = trim($value);
+    if ($value === '') {
+        return '';
+    }
+
+    if (preg_match('/(\d+)/', $value, $matches) !== 1) {
+        return $value;
+    }
+
+    return 'Class ' . $matches[1];
+}
+
 function getWorkbookSchoolDirectory(): array
 {
     return [
@@ -33,6 +47,35 @@ function getWorkbookSchoolDirectory(): array
             ['id' => 21, 'name' => 'Z.P. Primary School, Varale', 'teachers' => ['Sonali Gaikwad']],
         ],
     ];
+}
+
+function getWorkbookSchoolAliases(): array
+{
+    return [
+        'Halol' => [
+            normalizeWorkbookSchoolName('ઢીંકવા પ્રાથમિક શાળા (Dhikva Primary School)') => 'Dhikva Primary School',
+            normalizeWorkbookSchoolName('સાથરોટા પ્રાથમિક શાળા (Sathrota Primary School)') => 'Sathrota Primary School',
+            normalizeWorkbookSchoolName('એદલપુરા પ્રાથમિક શાળા (Aedelpura Primary School)') => 'Aedalpura Primary School',
+            normalizeWorkbookSchoolName('ખરખડી પ્રાથમિક શાળા (Kharkhdi Primary School)') => 'Kharkadi Primary School',
+            normalizeWorkbookSchoolName('નવા જખરીયા પ્રાથમિક શાળા (Nava Jakhriya Primary School)') => 'Nava Jakhriya Primary School',
+            normalizeWorkbookSchoolName('પારોલી પ્રાથમિક શાળા (Paroli Primary School)') => 'Paroli Primary School',
+        ],
+        'Maval' => [
+            normalizeWorkbookSchoolName('Ambi') => 'Z.P. Primary School,Ambi',
+            normalizeWorkbookSchoolName('Baddalwadi, Maval, Pune') => 'Z.P. Primary School, Badhalwadi',
+            normalizeWorkbookSchoolName('Kashal, Pune') => 'Z.P. School, Kashal',
+            normalizeWorkbookSchoolName('Nanoli, Maval, Pune') => 'Z.P.Primary School Nanoli Tarfe Chakan',
+            normalizeWorkbookSchoolName('Navalakh Umbre, Maval, Pune') => 'Z.P. Primary School, Navlakh Umbre',
+            normalizeWorkbookSchoolName('Urse, Maval, Pune') => 'Z.P. Primary School, Urse',
+            normalizeWorkbookSchoolName('Varale, Maval, Pune') => 'Z.P. Primary School, Varale',
+        ],
+    ];
+}
+
+function resolveWorkbookSchoolDisplayName(string $clusterName, string $schoolName): string
+{
+    $normalized = normalizeWorkbookSchoolName($schoolName);
+    return getWorkbookSchoolAliases()[$clusterName][$normalized] ?? $schoolName;
 }
 
 function getWorkbookClusterTeachers(string $clusterName): array
@@ -247,9 +290,9 @@ function loadWorkbookStudentsByCluster(): array
             }
 
             $studentsByCluster[$clusterName][] = [
-                'school_name' => $schoolName,
+                'school_name' => resolveWorkbookSchoolDisplayName($clusterName, $schoolName),
                 'name' => $studentName,
-                'className' => $className,
+                'className' => normalizeWorkbookClassName($className),
                 'gender' => inferWorkbookStudentGender($studentName),
             ];
         }
@@ -289,7 +332,7 @@ function getWorkbookSchoolContext(string $clusterName, string $schoolName): ?arr
         $students[] = [
             'id' => $studentId++,
             'name' => $student['name'],
-            'className' => $student['className'],
+            'className' => normalizeWorkbookClassName($student['className']),
             'gender' => $student['gender'],
         ];
     }

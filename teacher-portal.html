@@ -599,7 +599,7 @@
     <header class="navbar">
         <div class="nav-left">
             <a href="index.html" class="logo">
-                <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+                <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" decoding="async">
                 FLN System
             </a>
             <div class="nav-links">
@@ -770,8 +770,7 @@
                         </a>
                     </div>
 
-                    <div class="feature-card" onclick="window.location.href='training-schedule.html'"
-                        style="cursor: pointer;">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <!-- Calendar / Schedule SVG -->
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -785,7 +784,7 @@
                         <h3>Training Schedule</h3>
                         <p>Stay updated on upcoming cluster-level training sessions, webinars, and professional
                             development workshops for educators.</p>
-                        <a href="training-schedule.html" class="btn-feature">View Calendar
+                        <a href="#" class="btn-feature">View Calendar
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -826,7 +825,8 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h2>
-                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
+                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;" loading="lazy"
+                        decoding="async">
                     FLN System
                 </h2>
                 <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
@@ -865,9 +865,9 @@
                 <div class="footer-col">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="#">Documentation</a></li>
                         <li><a href="help-center.html">Help Center</a></li>
-                        <li><a href="training-schedule.html">Training</a></li>
+                        <li><a href="#">Training</a></li>
                         <li><a href="#">Contact Support</a></li>
                     </ul>
                 </div>

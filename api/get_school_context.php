@@ -5,6 +5,55 @@ declare(strict_types=1);
 require __DIR__ . '/db.php';
 require __DIR__ . '/workbook_data.php';
 
+function normalizeContextStudentName(string $value): string
+{
+    return strtolower(trim(preg_replace('/\s+/', ' ', $value) ?? ''));
+}
+
+function buildContextStudentIdentity(array $student): string
+{
+    $className = normalizeWorkbookClassName((string) ($student['class_name'] ?? $student['className'] ?? ''));
+
+    return normalizeContextStudentName((string) ($student['name'] ?? ''))
+        . '|'
+        . strtolower($className);
+}
+
+function shouldReplaceContextStudent(array $current, array $candidate): bool
+{
+    $currentClass = normalizeWorkbookClassName((string) ($current['className'] ?? $current['class_name'] ?? ''));
+    $candidateClass = normalizeWorkbookClassName((string) ($candidate['className'] ?? $candidate['class_name'] ?? ''));
+
+    if ($currentClass !== $candidateClass && str_starts_with($candidateClass, 'Class ')) {
+        return true;
+    }
+
+    return (int) ($candidate['id'] ?? 0) > (int) ($current['id'] ?? 0);
+}
+
+function dedupeContextStudents(array $students): array
+{
+    $uniqueStudents = [];
+
+    foreach ($students as $student) {
+        $student['className'] = normalizeWorkbookClassName((string) ($student['className'] ?? $student['class_name'] ?? ''));
+        $key = buildContextStudentIdentity($student);
+
+        if (!isset($uniqueStudents[$key]) || shouldReplaceContextStudent($uniqueStudents[$key], $student)) {
+            $uniqueStudents[$key] = $student;
+        }
+    }
+
+    uasort(
+        $uniqueStudents,
+        static fn(array $left, array $right): int =>
+            strcmp((string) $left['className'], (string) $right['className'])
+            ?: strcmp((string) $left['name'], (string) $right['name'])
+    );
+
+    return array_values($uniqueStudents);
+}
+
 try {
     $clusterName = trim($_GET['cluster'] ?? '');
     $schoolName = trim($_GET['school'] ?? '');
@@ -76,11 +125,13 @@ try {
             static fn(array $student): array => [
                 'id' => (int) $student['id'],
                 'name' => $student['name'],
-                'className' => $student['class_name'],
+                'className' => normalizeWorkbookClassName($student['class_name']),
                 'gender' => $student['gender'] ?: '',
             ],
             $studentStatement->fetchAll()
         );
+
+        $students = dedupeContextStudents($students);
 
         if ($workbookContext !== null) {
             if ($teachers === []) {
@@ -88,7 +139,7 @@ try {
             }
 
             if ($students === []) {
-                $students = $workbookContext['students'];
+                $students = dedupeContextStudents($workbookContext['students']);
             }
         }
 

@@ -764,7 +764,7 @@
   <header class="navbar">
     <div class="nav-left">
       <a href="index.html" class="logo">
-        <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+        <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" decoding="async">
         FLN System
       </a>
       <div class="nav-links">
@@ -868,7 +868,7 @@
             Total Students Present
             <span class="required">*</span>
           </label>
-          <input type="number" id="studentsPresent" name="studentsPresent" min="0" max="100" required />
+          <input type="number" id="studentsPresent" name="studentsPresent" min="0" max="100" value="0" required />
           <div class="error-message">Attendance selection will calculate total present automatically</div>
         </div>
 
@@ -885,7 +885,7 @@
                 Boys Present
                 <span class="required">*</span>
               </label>
-              <input type="number" id="boysPresent" name="boysPresent" min="0" max="100" required />
+              <input type="number" id="boysPresent" name="boysPresent" min="0" max="100" value="0" />
               <div class="error-message">Calculated automatically</div>
             </div>
 
@@ -894,7 +894,7 @@
                 Girls Present
                 <span class="required">*</span>
               </label>
-              <input type="number" id="girlsPresent" name="girlsPresent" min="0" max="100" required />
+              <input type="number" id="girlsPresent" name="girlsPresent" min="0" max="100" value="0" />
               <div class="error-message">Calculated automatically</div>
             </div>
           </div>
@@ -1137,7 +1137,7 @@
     <div class="footer-container">
       <div class="footer-brand">
         <h2>
-          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
+          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;" loading="lazy" decoding="async">
           FLN System
         </h2>
         <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
@@ -1190,7 +1190,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script defer src="script.js?v=20260401-2"></script>
 </body>
 
 </html>
