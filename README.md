@@ -1,5 +1,5 @@
 # FLN Daily Monitoring System
-## Space ECE India Foundation
+![FLN Monitoring Cover](assets/FLN%20Monitoring.png)
 
 A multi-page FLN monitoring website built with HTML, CSS, vanilla JavaScript, PHP, MySQL, and TCPDF for XAMPP-based local deployment.
 
