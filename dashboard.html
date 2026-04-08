@@ -8,8 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --yellow: #fcb900;
@@ -447,7 +446,7 @@
     <header class="navbar">
         <div class="nav-left">
             <a href="index.html" class="logo">
-                <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+                <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" decoding="async">
                 FLN System
             </a>
             <div class="nav-links">
@@ -590,7 +589,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h2>
-                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo">
+                    <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" loading="lazy" decoding="async">
                     FLN System
                 </h2>
                 <p>Empowering educators with data-driven insights for Foundational Literacy and Numeracy.</p>
@@ -627,7 +626,7 @@
         </div>
     </footer>
 
-    <script src="dashboard.js"></script>
+    <script defer src="dashboard.js?v=20260406-1"></script>
 </body>
 
 </html>

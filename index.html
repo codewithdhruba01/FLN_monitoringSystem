@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
   <style>
     :root {
       --yellow: #fcb900;
@@ -28,6 +27,16 @@
     body {
       color: var(--black);
       background-color: #ffffff;
+    }
+
+    .dashboard-section,
+    .courses-section,
+    .services-section,
+    .teachers-section,
+    .cta-section,
+    .site-footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 900px;
     }
 
     /* Navbar */
@@ -1103,7 +1112,7 @@
   <header class="navbar">
     <div class="nav-left">
       <div class="logo">
-        <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
+        <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;" decoding="async">
         FLN System
       </div>
       <div class="nav-links">
@@ -1153,13 +1162,13 @@
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
-          <button class="btn-hero white">
+          <button class="btn-hero white" onclick="window.location.href='dashboard.html'">
             Dashboard
           </button>
         </div>
       </div>
       <div class="hero-image">
-        <img src="assets/hero.png" alt="Doctors at table">
+        <img src="assets/hero.png" alt="Doctors at table" fetchpriority="high" decoding="async">
       </div>
     </section>
 
@@ -1219,7 +1228,7 @@
               <div class="course-card card-yellow">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/neo_school_1.png" alt="Halol Primary School">
+                  <img src="assets/neo_school_1.png" alt="Halol Primary School" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Abhetlav Primary School</div>
@@ -1231,7 +1240,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/School3.png" alt="Halol Secondary School">
+                  <img src="assets/School3.png" alt="Halol Secondary School" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Academy Centre - Masvad</div>
@@ -1243,7 +1252,7 @@
               <div class="course-card card-black">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/neo_school_3.png" alt="Halol High School">
+                  <img src="assets/neo_school_3.png" alt="Halol High School" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Academy Centre - Arad</div>
@@ -1257,7 +1266,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/neo_school_4.png" alt="Aedalpura Primary School">
+                  <img src="assets/neo_school_4.png" alt="Aedalpura Primary School" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Aedalpura Primary School</div>
@@ -1269,7 +1278,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/neo_school_2.png" alt="Aedalpura Primary School">
+                  <img src="assets/neo_school_2.png" alt="Aedalpura Primary School" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Aedalpura Primary School</div>
@@ -1281,7 +1290,7 @@
               <div class="course-card card-black">
                 <span class="badge">Halol</span>
                 <div class="card-image">
-                  <img src="assets/course2.png" alt="Halol Public School">
+                  <img src="assets/course2.png" alt="Halol Public School" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Govindpuri Remedial(LIB)</div>
@@ -1301,7 +1310,7 @@
               <div class="course-card card-yellow">
                 <span class="badge">Maval Cluster</span>
                 <div class="card-image">
-                  <img src="assets/course1.png" alt="Evaluating patient">
+                  <img src="assets/course1.png" alt="Evaluating patient" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Shri Chhtrapati Shivaji Vcidya Mandir, Kanhe</div>
@@ -1315,7 +1324,7 @@
               <div class="course-card card-dark">
                 <span class="badge">Maval Cluster</span>
                 <div class="card-image">
-                  <img src="assets/School3.png" alt="Medical statistics">
+                  <img src="assets/School3.png" alt="Medical statistics" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Shriram Vidyalaya, Navalakh Umbre</div>
@@ -1329,7 +1338,7 @@
               <div class="course-card card-black">
                 <span class="badge">Maval Cluster</span>
                 <div class="card-image">
-                  <img src="assets/School4.png" alt="Doctor and law">
+                  <img src="assets/School4.png" alt="Doctor and law" loading="lazy" decoding="async">
                 </div>
                 <div class="card-content">
                   <div class="card-title">Z P Primary Schoool, Bhoyare</div>
@@ -1344,16 +1353,16 @@
             <div class="courses-grid hidden-row">
               <!-- Card 4 placeholder -->
               <div class="course-card">
-                <div class="card-image"><img src="assets/neo_school_1.png"></div>
+                <div class="card-image"><img src="assets/neo_school_1.png" loading="lazy" decoding="async" alt="School preview"></div>
               </div>
               <!-- Card 5 placeholder -->
               <div class="course-card">
-                <div class="card-image"><img src="assets/neo_school_2.png"></div>
+                <div class="card-image"><img src="assets/neo_school_2.png" loading="lazy" decoding="async" alt="School preview"></div>
               </div>
               <!-- Card 6 placeholder -->
               <div class="course-card">
                 <span class="badge">Maval Cluster</span>
-                <div class="card-image"><img src="assets/neo_school_3.png"></div>
+                <div class="card-image"><img src="assets/neo_school_3.png" loading="lazy" decoding="async" alt="School preview"></div>
               </div>
             </div>
             <div class="fade-overlay"></div>
@@ -1430,7 +1439,7 @@
         <div class="teachers-grid">
           <div class="teacher-card">
             <div class="teacher-avatar">
-              <img src="https://ui-avatars.com/api/?name=Priya+Sharma&background=random&size=120"
+              <img src="https://ui-avatars.com/api/?name=Priya+Sharma&background=random&size=120" loading="lazy" decoding="async"
                 alt="Dr. Priya Sharma">
             </div>
             <h3>Dr. Priya Sharma</h3>
@@ -1438,14 +1447,14 @@
           </div>
           <div class="teacher-card">
             <div class="teacher-avatar">
-              <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=random&size=120" alt="Rajesh Kumar">
+              <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=random&size=120" alt="Rajesh Kumar" loading="lazy" decoding="async">
             </div>
             <h3>Rajesh Kumar</h3>
             <p>Monitoring Expert</p>
           </div>
           <div class="teacher-card">
             <div class="teacher-avatar">
-              <img src="https://ui-avatars.com/api/?name=Anita+Patel&background=random&size=120" alt="Anita Patel">
+              <img src="https://ui-avatars.com/api/?name=Anita+Patel&background=random&size=120" alt="Anita Patel" loading="lazy" decoding="async">
             </div>
             <h3>Anita Patel</h3>
             <p>FLN Coordinator</p>
@@ -1468,7 +1477,7 @@
             </svg></button>
         </div>
         <div class="cta-image-wrapper">
-          <img src="assets/Student.png" alt="Student Illustration">
+          <img src="assets/Student.png" alt="Student Illustration" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -1478,7 +1487,7 @@
     <div class="footer-container">
       <div class="footer-brand">
         <h2>
-          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;">
+          <img class="logo-icon" src="assets/logo.jpeg" alt="Logo" style="object-fit: cover;" loading="lazy" decoding="async">
           FLN System
         </h2>
         <p>Empowering Education Through Comprehensive Monitoring across all schools and clusters.</p>
@@ -1517,9 +1526,9 @@
         <div class="footer-col">
           <h4>Resources</h4>
           <ul>
-            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="#">Documentation</a></li>
             <li><a href="help-center.html">Help Center</a></li>
-            <li><a href="training-schedule.html">Training</a></li>
+            <li><a href="#">Training</a></li>
             <li><a href="#">Contact Support</a></li>
           </ul>
         </div>

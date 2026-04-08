@@ -4,6 +4,45 @@ declare(strict_types=1);
 
 require __DIR__ . '/db.php';
 
+function normalizeMonitoringStudentName(string $value): string
+{
+    return strtolower(trim(preg_replace('/\s+/', ' ', $value) ?? ''));
+}
+
+function assertUniqueStudentRows(array $rows, string $fieldName): void
+{
+    $seen = [];
+
+    foreach ($rows as $index => $row) {
+        $studentName = trim((string) ($row['name'] ?? ''));
+        if ($studentName === '') {
+            continue;
+        }
+
+        $key = normalizeMonitoringStudentName($studentName);
+        if (isset($seen[$key])) {
+            throw new RuntimeException(
+                sprintf(
+                    'Duplicate student "%s" found in %s. Refresh the teacher portal and submit again.',
+                    $studentName,
+                    $fieldName
+                )
+            );
+        }
+
+        $seen[$key] = $index;
+    }
+}
+
+function normalizeOptionalInteger($value, int $default = 0): int
+{
+    if ($value === '' || $value === null) {
+        return $default;
+    }
+
+    return (int) $value;
+}
+
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         sendJson([
@@ -34,6 +73,10 @@ try {
     ];
 
     foreach ($required as $field) {
+        if (in_array($field, ['boysPresent', 'girlsPresent'], true) && (($data[$field] ?? null) === '' || ($data[$field] ?? null) === null)) {
+            $data[$field] = 0;
+        }
+
         if (!array_key_exists($field, $data) || $data[$field] === '' || $data[$field] === null) {
             sendJson([
                 'success' => false,
@@ -41,6 +84,9 @@ try {
             ], 422);
         }
     }
+
+    assertUniqueStudentRows($data['studentPerformance'] ?? [], 'student performance');
+    assertUniqueStudentRows($data['studentAttendance'] ?? [], 'student attendance');
 
     $pdo = getDatabaseConnection();
     $pdo->beginTransaction();
@@ -135,9 +181,9 @@ try {
         'grade_name' => $data['grade'],
         'section_name' => $data['section'] ?? '',
         'monitoring_date' => $data['date'],
-        'students_present' => (int) $data['studentsPresent'],
-        'boys_present' => (int) $data['boysPresent'],
-        'girls_present' => (int) $data['girlsPresent'],
+        'students_present' => normalizeOptionalInteger($data['studentsPresent']),
+        'boys_present' => normalizeOptionalInteger($data['boysPresent']),
+        'girls_present' => normalizeOptionalInteger($data['girlsPresent']),
         'fln_period_happened' => $data['flnPeriod'] === 'yes' ? 1 : 0,
         'fln_not_happened_reason' => $data['reason'] ?: null,
         'instruction_duration_minutes' => (int) $data['duration'],

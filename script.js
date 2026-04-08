@@ -655,9 +655,9 @@ function updateAttendanceTotals() {
     girlsPresent += 1;
   });
 
-  totalInput.value = totalPresent > 0 ? String(totalPresent) : '';
-  boysInput.value = boysPresent > 0 ? String(boysPresent) : '';
-  girlsInput.value = girlsPresent > 0 ? String(girlsPresent) : '';
+  totalInput.value = String(totalPresent);
+  boysInput.value = String(boysPresent);
+  girlsInput.value = String(girlsPresent);
 
   totalInput.closest('.form-group')?.classList.remove('field-error');
   boysInput.closest('.form-group')?.classList.remove('field-error');
@@ -665,6 +665,27 @@ function updateAttendanceTotals() {
   totalInput.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
   boysInput.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
   girlsInput.closest('.form-group')?.querySelector('.error-message')?.classList.remove('show');
+}
+
+function getNumericFieldValue(fieldId, fallback = 0) {
+  const field = document.getElementById(fieldId);
+  if (!field) {
+    return fallback;
+  }
+
+  const rawValue = field.value.trim();
+  if (!rawValue) {
+    field.value = String(fallback);
+    return fallback;
+  }
+
+  const parsed = parseInt(rawValue, 10);
+  if (Number.isNaN(parsed)) {
+    field.value = String(fallback);
+    return fallback;
+  }
+
+  return parsed;
 }
 
 function updateReasonVisibility() {
@@ -795,14 +816,15 @@ function selectAttendanceStatus(btn) {
 }
 
 function isFormComplete() {
+  getNumericFieldValue('boysPresent');
+  getNumericFieldValue('girlsPresent');
+
   const requiredFields = [
     'teacher',
     'gradeStart',
     'gradeEnd',
     'date',
     'studentsPresent',
-    'boysPresent',
-    'girlsPresent',
     'mainTopic',
     'literacyFocus',
     'literacyConcept',
@@ -830,9 +852,9 @@ function isFormComplete() {
     }
   }
 
-  const boysPresent = parseInt(document.getElementById('boysPresent')?.value || '0', 10);
-  const girlsPresent = parseInt(document.getElementById('girlsPresent')?.value || '0', 10);
-  const studentsPresent = parseInt(document.getElementById('studentsPresent')?.value || '0', 10);
+  const boysPresent = getNumericFieldValue('boysPresent');
+  const girlsPresent = getNumericFieldValue('girlsPresent');
+  const studentsPresent = getNumericFieldValue('studentsPresent');
 
   if (boysPresent + girlsPresent !== studentsPresent) {
     return false;
@@ -944,9 +966,9 @@ function buildFormPayload() {
     grade: getSelectedGradeRange(),
     section: '',
     date: document.getElementById('date').value,
-    studentsPresent: parseInt(document.getElementById('studentsPresent').value, 10),
-    boysPresent: parseInt(document.getElementById('boysPresent').value, 10),
-    girlsPresent: parseInt(document.getElementById('girlsPresent').value, 10),
+    studentsPresent: getNumericFieldValue('studentsPresent'),
+    boysPresent: getNumericFieldValue('boysPresent'),
+    girlsPresent: getNumericFieldValue('girlsPresent'),
     flnPeriod: document.querySelector('input[name="flnPeriod"]:checked').value,
     reason: document.getElementById('reason').value || null,
     duration: parseInt(document.querySelector('input[name="duration"]:checked').value, 10),
@@ -994,8 +1016,6 @@ async function handleFormSubmit(event) {
     'gradeEnd',
     'date',
     'studentsPresent',
-    'boysPresent',
-    'girlsPresent',
     'flnPeriod',
     'duration',
     'engagement',
@@ -1018,9 +1038,9 @@ async function handleFormSubmit(event) {
     isValid = false;
   }
 
-  const boysPresent = parseInt(document.getElementById('boysPresent')?.value || '0', 10);
-  const girlsPresent = parseInt(document.getElementById('girlsPresent')?.value || '0', 10);
-  const studentsPresent = parseInt(document.getElementById('studentsPresent')?.value || '0', 10);
+  const boysPresent = getNumericFieldValue('boysPresent');
+  const girlsPresent = getNumericFieldValue('girlsPresent');
+  const studentsPresent = getNumericFieldValue('studentsPresent');
   if (boysPresent + girlsPresent !== studentsPresent) {
     showError('studentsPresent', 'Total students must match boys present + girls present');
     isValid = false;
