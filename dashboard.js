@@ -663,7 +663,7 @@ function updateTrendSummary(data) {
 
 function renderCharts(data, elements) {
     renderTrendChart(data.weekly_trend || [], elements.attendanceCanvas);
-    renderDailySummaryChart(data.daily_summary || {}, elements.progressCanvas);
+    renderDailySummaryChart(data.daily_summary || {}, data.totals || {}, elements.progressCanvas);
     renderStudentAttendanceChart(data.student_wise_attendance || [], elements.clusterCanvas);
     renderSubjectChart(data.subject_wise_attendance || [], elements.subjectCanvas);
 }
@@ -789,29 +789,71 @@ function renderTrendChart(weeklyTrend, canvas) {
     });
 }
 
-function renderDailySummaryChart(dailySummary, canvas) {
+function renderDailySummaryChart(dailySummary, totals, canvas) {
+    const dailyPresent = Number(dailySummary.present || 0);
+    const dailyAbsent = Number(dailySummary.absent || 0);
+    const overallPresent = Number(totals.overall_present || 0);
+    const overallAbsent = Number(totals.overall_absent || 0);
+
+    const hasDailyData = dailyPresent + dailyAbsent > 0;
+    const presentValue = hasDailyData ? dailyPresent : overallPresent;
+    const absentValue = hasDailyData ? dailyAbsent : overallAbsent;
+    const showPlaceholder = presentValue + absentValue === 0;
+
     analyticsState.charts.progress = createOrUpdateChart(analyticsState.charts.progress, canvas, {
         type: 'pie',
         data: {
-            labels: ['Present', 'Absent'],
+            labels: showPlaceholder ? ['No attendance data'] : ['Present', 'Absent'],
             datasets: [
                 {
-                    data: [dailySummary.present || 0, dailySummary.absent || 0],
-                    backgroundColor: ['#4ade80', '#ff4d4d'],
-                    borderColor: '#222222',
+                    data: showPlaceholder ? [1] : [presentValue, absentValue],
+                    backgroundColor: showPlaceholder ? ['#d6d3d1'] : ['#4ade80', '#ff4d4d'],
+                    borderColor: showPlaceholder ? ['#222222'] : ['#222222', '#222222'],
                     borderWidth: 3,
+                    radius: '82%',
+                    hoverOffset: showPlaceholder ? 0 : 10,
                 },
             ],
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 8,
+                    right: 8,
+                    bottom: 8,
+                    left: 8,
+                },
+            },
+            animation: false,
+            elements: {
+                arc: {
+                    borderAlign: 'inner',
+                },
+            },
             plugins: {
                 legend: {
                     position: 'bottom',
+                    display: !showPlaceholder,
                     labels: {
                         padding: 18,
                         font: { weight: '700' },
+                    },
+                },
+                tooltip: {
+                    callbacks: {
+                        label(context) {
+                            if (showPlaceholder) {
+                                return 'No attendance data for the selected filters';
+                            }
+
+                            const label = context.label || '';
+                            const value = Number(context.raw || 0);
+                            const total = presentValue + absentValue;
+                            const percentage = total > 0 ? roundToTwo((value / total) * 100) : 0;
+                            return `${label}: ${stripTrailingZeros(value)} (${stripTrailingZeros(percentage)}%)`;
+                        },
                     },
                 },
             },
@@ -1112,10 +1154,23 @@ function createOrUpdateChart(existingChart, canvas, config) {
         return existingChart;
     }
 
+    const shouldRecreate =
+        existingChart &&
+        (
+            existingChart.config?.type !== config.type ||
+            config.type === 'pie' ||
+            config.type === 'doughnut' ||
+            config.type === 'polarArea'
+        );
+
+    if (shouldRecreate) {
+        existingChart.destroy();
+        existingChart = null;
+    }
+
     if (existingChart) {
         existingChart.data = config.data;
         existingChart.options = config.options;
-        existingChart.config.type = config.type;
         existingChart.update();
         return existingChart;
     }
