@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="assets/social-links.css">
+    <link rel="stylesheet" href="assets/mobile-nav.css">
+    <link rel="stylesheet" href="assets/back-to-top.css">
+    <script src="assets/social-links.js" defer></script>
+    <script src="assets/mobile-nav.js" defer></script>
+    <script src="assets/back-to-top.js" defer></script>
     <style>
         :root {
             --yellow: #fcb900;
@@ -468,7 +474,13 @@
             <a href="cluster.html" class="btn-write">
                 Start Now
             </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+            </button>
         </div>
+        <div class="mobile-nav-panel" hidden></div>
     </header>
 
     <section class="dashboard-header">
