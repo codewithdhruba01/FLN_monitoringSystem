@@ -592,6 +592,12 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/social-links.css">
+    <link rel="stylesheet" href="assets/mobile-nav.css">
+    <link rel="stylesheet" href="assets/back-to-top.css">
+    <script src="assets/social-links.js" defer></script>
+    <script src="assets/mobile-nav.js" defer></script>
+    <script src="assets/back-to-top.js" defer></script>
 </head>
 
 <body>
@@ -627,7 +633,13 @@
             <button class="btn-write" onclick="window.location.href='cluster.html'">
                 Start Now
             </button>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+            </button>
         </div>
+        <div class="mobile-nav-panel" hidden></div>
     </header>
 
     <main>
