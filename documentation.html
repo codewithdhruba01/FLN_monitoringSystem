@@ -403,6 +403,10 @@
           padding: 0 40px;
         }
 
+        .nav-links {
+          display: none;
+        }
+
         .doc-header {
           padding: 60px 40px;
         }
@@ -421,6 +425,45 @@
 
         .info-list {
           grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        html,
+        body {
+          overflow-x: hidden;
+          width: 100%;
+        }
+
+        .navbar {
+          padding: 0 16px;
+          min-height: 60px;
+          align-items: center;
+        }
+
+        .nav-left {
+          gap: 12px;
+        }
+
+        .logo {
+          font-size: 15px;
+        }
+
+        .logo-icon {
+          width: 28px;
+          height: 28px;
+        }
+
+        .nav-right {
+          gap: 8px;
+        }
+
+        .social-icons {
+          display: none;
+        }
+
+        .doc-header {
+          padding: 60px 24px;
         }
       }
     </style>
